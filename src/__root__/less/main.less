@@ -1,0 +1,50 @@
+@import 'context';
+
+// settings
+
+@import 'core';
+
+@import 'templates/type/font-face';
+
+//components
+@import 'components/header';
+@import 'components/footer';
+
+@import 'partials/modal';
+
+
+
+// common ui materialize components
+//@import 'ui/animation';
+//@import 'ui/button';
+
+body{
+  margin: 0;
+}
+
+header, main, footer{
+  .flex-display;
+  .justify-content(center);
+  .container{
+    .flex(0 1 1200px);
+    padding: 0 25px;
+  }
+}
+
+.logged-out{
+  .mod-logged-in{
+    display: none;
+  }
+  .mod-logged-out{
+    display: initial;
+  }
+}
+
+.logged-in{
+  .mod-logged-in{
+    diplsay: initial;
+  }
+  .mod-logged-out{
+    display: none;
+  }
+}

@@ -1,0 +1,68 @@
+@import 'context';
+
+.modal-backdrop {
+  .align-items(center);
+  .justify-content(center);
+  position: fixed;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99999999;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: default;
+  top: 0;
+  overflow: auto;
+  html.has-modal & { .flex-display; }
+}
+
+body {
+
+  //> header, > footer, > main {
+   // filter: blur(0);
+    //-webkit-filter: blur(0);
+  //}
+
+  &.has-modal {
+    > header, > footer, > main {
+      filter: blur(1rem);
+      -webkit-filter: blur(1rem);
+    }
+  }
+}
+
+.modal {
+  cursor: default;
+  overflow: hidden;
+  position: relative;
+  border: 0;
+  margin: 0 auto;
+  z-index: 1010;
+  .body {
+    overflow: hidden;
+  }
+
+  #withdrawal-inrneft {
+    .button-wrapper {
+      padding-top: 2.5rem;
+    }
+  }
+}
+
+.modal {
+  display: none;
+  &.active {
+    display: block;
+    float: none;
+    margin:0;
+  }
+}
+
+div.modal {
+  padding: 3rem;
+  header {
+    h2 {
+      margin-top: 0;
+    }
+  }
+}

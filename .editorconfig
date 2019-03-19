@@ -1,0 +1,17 @@
+# No .editorconfig files above the root directory
+root = true
+
+[*]
+indent_style = space
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Use 2 spaces for indentation in HTML, JavaScript, SCSS, and JSON
+[*.{html,js,hbs,scss,json}]
+indent_size = 2
+
+# Use 4 spaces for indentation in Markdown files
+[*.md]
+indent_size = 4
