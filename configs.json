@@ -38,7 +38,7 @@
     "loginRedirect": "https://alpha.dubli.com"
   },
   "allowedCorsOrigins": [
-
+    "https://us-central1-web-proposals.cloudfunctions.net"
   ],
   "whitelabel": {
     "defaults": {

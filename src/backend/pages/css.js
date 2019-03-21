@@ -15,11 +15,22 @@ const packageRoot = path.resolve(__dirname, '../../..');
 const srcRoot = path.resolve(packageRoot, 'src/__root__');
 const lessRoot = path.resolve(srcRoot, 'less');
 
-const LESS_OPTIONS = { paths: [lessRoot], compress: squish.squishable };
-const IS_PAGE_CSS = /\/assets\/page\.css$/;
+
 
 function * middleware (next) {
   if (!this.state.page) return yield next;
+
+  console.log(this.state.siteSettings)
+
+  var csasdf = {
+    "@primaryColor": this.state.siteSettings.primaryColor,
+    "@secondaryColor": this.state.siteSettings.secondaryColor
+  }
+
+  const LESS_OPTIONS = { paths: [lessRoot], compress: squish.squishable, modifyVars:  csasdf};
+  const IS_PAGE_CSS = /\/assets\/page\.css$/;
+
+
   if (!IS_PAGE_CSS.test(this.state.url.pathname)) return yield next;
 
   const WL = this.state.whitelabel;

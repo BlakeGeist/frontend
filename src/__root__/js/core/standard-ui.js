@@ -57,6 +57,26 @@
       var targetItem = $(this).data('collection-delete-taraget');
       C.run('data:delete:collection-item', targetItem);
     });
+
+    $(document).on('submit', '[data-string]', function(e){
+      H.stopEvents(e);
+      var formData = H.getFormData(this);
+      $.ajax({
+        url: 'https://us-central1-web-proposals.cloudfunctions.net/createString',
+        dataType: "json",
+        type: 'GET',
+        data: formData,
+        success: function (data) {
+            console.log("Got data", data);
+        },
+        error: function (xhr, status, error) {
+            console.log('Error: ' + JSON.stringify(error));
+            console.log('status: ' + status);
+        },
+      });
+    });
+
+
   }
 
   function initUIForUser(user) {

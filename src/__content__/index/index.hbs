@@ -6,13 +6,15 @@
 
   <div class="container">
 
+    <h1>{{siteSettings.name}}</h1>
+
     <div
       data-target="account-info"
       >
     </div>
 
   <form
-    data-collection-form="proposal"
+    data-collection-form="product"
     >
 
     <input
@@ -27,18 +29,51 @@
       type="input"
       />
 
-      |
+    |
 
-      <input
-        type="submit"
-        value="submit"
-        />
+    <input
+      type="submit"
+      value="submit"
+      />
 
-    </form>
+  </form>
 
-  {{#each fireBaseData}}
+  <hr />
 
-    <p>name: <a href="/{{../settings.region}}/{{../settings.language}}/proposal/{{slug}}">{{name}}</a> | <a href="" data-collection-delete-taraget="{{slug}}">delete</a></p>
+  <form
+    data-string="create"
+    >
+
+    <input
+      name="slug"
+      placeholder="slug"
+      type="input"
+      />
+
+    <input
+      name="text"
+      placeholder="text"
+      type="input"
+      />
+
+    |
+
+    <input
+      type="submit"
+      value="submit"
+      />
+
+  </form>
+
+  <p>{{translate 'BIG-TEXT-STRING'}}</p>
+
+  <p>{{translate 'testSlug3'}}</p>
+
+  <hr />
+
+  {{#each products}}
+
+    <p>{{translate 'NAME'}}: <a href="/{{../settings.region}}/{{../settings.language}}/product/{{slug}}">{{name}}</a> | <a href="" data-collection-delete-taraget="{{slug}}">delete</a></p>
 
   {{/each}}
 

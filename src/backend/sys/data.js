@@ -1,7 +1,6 @@
 'use strict';
 
 const _ = require('lodash');
-const configs = require('../../../configs.json');
 const co = require('co');
 const debug = require('debug')('backend:sys:data');
 const request = require('request-promise');
@@ -40,24 +39,11 @@ function cacherKey (ctx) {
 }
 
 function setup (app) {
-  const apiClient = getApiClient();
-
   app.use(function * (next) {
     const data = getData();
     this.fetch = getCacher(cacherKey(this), data);
     yield next;
   });
-}
-
-const _data_client_wl_cache = {};
-function getDataWithWhitelabelHeaders (apiClient, ctx) {
-  const wl = ctx.state.whitelabel;
-  _data_client_wl_cache[wl] = getData(apiClient.defaults({
-    headers: {
-      'x-appwl': wl
-    }
-  }));
-  return getData();
 }
 
 const firebase = require('firebase');
@@ -81,7 +67,7 @@ function getData () {
   const getKey = key => resp => _.get(resp, 'body.' + key);
   const _DATA = {};
   _DATA._fetchers = {
-    proposals: async function getFireData () {
+    proposals: async function () {
       const fireData = {};
       await db.collection('proposals')
         .get()
@@ -95,7 +81,7 @@ function getData () {
         })
       return fireData;
     },
-    proposalBySlug: async function getFireData (varients, slug) {
+    proposalBySlug: async function (varients, slug) {
       const fireData = {};
       await db.collection('proposals').doc(slug)
         .get()
@@ -105,7 +91,7 @@ function getData () {
         })
       return fireData;
     },
-    strings: async function getFireData () {
+    strings: async function () {
       const fireData = {};
       await db.collection('strings')
         .get()
@@ -119,6 +105,40 @@ function getData () {
         })
       return fireData;
     },
+    products: async function () {
+      const fireData = {};
+      await db.collection('products')
+        .get()
+        .then(query=>{
+            let data = query.docs.map(doc=>{
+                let x = doc.data()
+                    x['_id']=doc.id;
+                    return x;
+            })
+            _.extend(fireData, data);
+        })
+      return fireData;
+    },
+    productBySlug: async function (varients, slug) {
+      const fireData = {};
+      await db.collection('products').doc(slug)
+        .get()
+        .then(doc=>{
+          let data = doc.data();
+          _.extend(fireData, data);
+        })
+      return fireData;
+    },
+    siteSettings: async function (varients, slug) {
+      const fireData = {};
+      await db.collection('sites').doc('localhost')
+        .get()
+        .then(doc=>{
+          let data = doc.data();
+          _.extend(fireData, data);
+        })
+      return fireData;
+    }
   };
 
   _DATA.get = co.wrap(function * (type) {
@@ -130,37 +150,4 @@ function getData () {
   });
 
   return _DATA;
-}
-
-function _slugify (text) {
-  return text.toString().toLowerCase().trim()
-    .replace(/\s+/g, '-')           // Replace spaces with -
-    .replace(/&/g, '-and-')         // Replace & with 'and'
-    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-    .replace(/\-\-+/g, '-');        // Replace multiple - with single -
-}
-
-function getApiClient () {
-  const apiClient = request.defaults({
-    baseUrl: configs.api.internalUrl,
-    forever: true,
-    // pool: {maxSockets: 20},
-    json: true,
-    simple: false,
-    resolveWithFullResponse: true
-  });
-
-  return apiClient;
-}
-
-function check2xxOr404 (errorMessage) {
-  if (!errorMessage) errorMessage = 'API Call failed to return either a 2XX or 404 response!';
-  return function (response) {
-    const code = response.statusCode;
-    let ok = false;
-    if (code === 404) ok = true;
-    if (code >= 200 && code < 300) ok = true;
-    if (!ok) throw new Error(errorMessage + ' (status code was: ' + code + ')');
-    return code === 404 ? {} : response;
-  };
 }

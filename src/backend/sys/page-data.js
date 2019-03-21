@@ -43,7 +43,9 @@ function * getAsyncMeta () {
 function * getAsyncFireMeta () {
   const asyncMeta = yield {
     fireData: this.fetch('proposals').catch(logAndDefault('proposals', [], this)),
-    fireStrings: this.fetch('strings').catch(logAndDefault('strings', [], this))
+    fireStrings: this.fetch('strings').catch(logAndDefault('strings', [], this)),
+    fireProducts: this.fetch('products').catch(logAndDefault('products', [], this)),
+    fireSiteSettings: this.fetch('siteSettings').catch(logAndDefault('siteSettings', [], this))
   };
   return asyncMeta;
 }
@@ -70,21 +72,11 @@ function * getMeta () {
     {},
     aMeta,
     {
-      api: _st.apiBaseUrl,
       lang: _st.translations,
       appIds: {
         facebook: _.get(_wl, 'oauth.facebook.clientID'),
         twitter: _.get(_wl, 'oauth.twitter.clientID'),
         google: _.get(_wl, 'oauth.google.clientID')
-      },
-      contactsAppIds: {
-      },
-      vipPrices: {
-        usd: _.get(_st, 'configs.purchaseItems.vip.usd'),
-        aud: _.get(_st, 'configs.purchaseItems.vip.aud'),
-        eur: _.get(_st, 'configs.purchaseItems.vip.eur'),
-        inr: _.get(_st, 'configs.purchaseItems.vip.inr'),
-        gbp: _.get(_st, 'configs.purchaseItems.vip.gbp')
       },
       language: _st.language,
       region: _st.region,
@@ -93,7 +85,6 @@ function * getMeta () {
       defaultRegion: _wl.settings.defaultRegion,
       defaultLanguage: _wl.settings.defaultLanguage,
       defaultCurrency: _wl.settings.defaultCurrency,
-      defaultCurrencyForRegion: _.get(_st, 'configs.whitelabel.defaults.settings.region[' + _st.region + '].currency', 'usd'),
       gvscLink: _.get(_st, 'configs.urls.gvscLink'),
       bspSavemateLink: _.get(_st, 'configs.urls.bspSavemateLink'),
       variant: _st.variant,
@@ -103,8 +94,6 @@ function * getMeta () {
       whitelabelDomain: _wl.domain,
       whitelabelDomainFancy: _wl['domain-fancy'],
       whitelabelUrl: 'https://' + _wl.domain,
-      whitelabelOrg: _wl.org,
-      investorRelations: _wl.investorRelations,
       whitelabelDomainOrg: _wl['domain-org'],
       whitelabelSocial: _wl.social,
       hasCustomFooter: _wl.hasCustomFooter,
@@ -131,12 +120,15 @@ function * getMeta () {
 }
 
 function * getTemplateArguments (extend) {
+  const _st = this.state;
   const fireMeta = yield getAsyncFireMeta.call(this);
   const data = yield {
     pageData: this.getPageData(this),
     meta: this.getMeta(this),
     fireBaseData: fireMeta.fireData,
+    siteSettings: fireMeta.fireSiteSettings
   };
+
 
   //override current date to test carousel in advance
   if(this.query && this.query.carouselDate)
@@ -156,13 +148,14 @@ function * getTemplateArguments (extend) {
     },
     fireBaseData: fireMeta.fireData,
     strings: fireMeta.fireStrings,
+    products: fireMeta.fireProducts,
+    siteSettings: fireMeta.fireSiteSettings,
     settings: {
       region: data.meta.region,
       language: data.meta.language,
       defaultRegion: data.meta.defaultRegion,
       defaultLanguage: data.meta.defaultLanguage,
       defaultCurrency: data.meta.defaultCurrency,
-      defaultCurrencyForRegion: data.meta.defaultCurrencyForRegion,
       languages: languages, // this is only a list of language codes. real language data is in lang.languages
       variant: data.meta.variant,
       vipPrices: data.meta.vipPrices,
@@ -173,7 +166,6 @@ function * getTemplateArguments (extend) {
       wlDomain: data.meta.whitelabelDomain,
       wlDomainFancy: data.meta.whitelabelDomainFancy,
       wlUrl: data.meta.whitelabelUrl,
-      wlOrg: data.meta.whitelabelOrg,
       wlDomainOrg: data.meta.whitelabelDomainOrg,
       wlInvestorRelations: data.meta.investorRelations,
       wlSocial: data.meta.whitelabelSocial,
@@ -222,8 +214,14 @@ function getContextTime (interval) {
   return Math.floor(Date.now() / interval) * interval;
 }
 
+async function getSiteSettings (extend) {
+  const fireMeta = await extend.fetch('siteSettings').catch(logAndDefault('siteSettings', [], this));
+  return fireMeta
+}
+
 function setup (app) {
   app.use(function * (next) {
+    this.state.siteSettings = yield getSiteSettings(this);
     this.getMeta = getMeta;
     this.getAsyncMeta = getAsyncMeta;
     this.getPageData = getPageData;

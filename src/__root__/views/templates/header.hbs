@@ -4,24 +4,24 @@
 
     <nav>
 
-      <a href="/{{settings.region}}/{{settings.language}}">Home</a>
+      <a
+        href="/{{settings.region}}/{{settings.language}}"
+        >
+        {{translate 'HOME'}}
+      </a>
 
       <a
         class="mod-logged-out"
         href="/{{settings.region}}/{{settings.language}}/login/"
         >
-
-        Login
-
+        {{translate 'LOGIN'}}
       </a>
 
       <a
         class="mod-logged-out"
         href="/{{settings.region}}/{{settings.language}}/register/"
         >
-
-        Register
-
+        {{translate 'REGISTER'}}
       </a>
 
       <a
@@ -29,8 +29,8 @@
         data-auth="sign-out"
         href=""
         >
-          Sign Out
-        </a>
+        {{translate 'SIGN-OUT'}}
+      </a>
 
     </nav>
 

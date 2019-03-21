@@ -42,32 +42,8 @@ app.proxy = true;
   .component('pages/static')     // serves page-specific static assets
   .component('sitemap')          // handle sitemap xml files
   .use(router.routes())          // enable the router after all other middlewares have run
-  .use(logUnhandledRoutes)       // log unhandled urls, for debugging purposes
   .listen(8081, startup)         // start the server
 );
-
-function * logUnhandledRoutes (next) {
-  console.error('Un-Routed url: ', this.url);
-  if (this.url.indexOf('/LP') > -1) {
-    var parts = this.url.split('\/');
-    if (this.url.indexOf('\/vip\/LP') > -1 || this.url.indexOf('\/join\/LP') > -1) {
-      if (parts.length >= 5) {
-        var mapping_url = parts[3] + parts[4];
-        var querystring = parts[5] + '&mapping_url=' + mapping_url;
-        this.redirect(configs.api.url + '/lp/mapping' + querystring);
-      } else {
-        this.redirect(configs.api.url + this.url);
-      }
-    } else if (parts.length >= 5) {
-      var mapping_url = parts[3];
-      var querystring = parts[4] + '&mapping_url=' + mapping_url;
-      this.redirect(configs.api.url + '/lp/mapping' + querystring);
-    } else {
-      this.redirect(configs.api.url + this.url);
-    }
-  }
-  return yield next;
-}
 
 function component (name) {
   const _module = require('./src/backend/' + name);

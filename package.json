@@ -10,6 +10,7 @@
     "co-body": "^4.0.0",
     "co-wait": "0.0.0",
     "co-waiter": "^1.0.2",
+    "cors": "^2.8.5",
     "cssmin": "^0.4.3",
     "debug": "^2.2.0",
     "denodeify": "^1.2.1",

@@ -27,7 +27,6 @@ function * middleware (next) {
   _st.hostname = _st.hostname.replace('test-', '');
   _st.hostname = _st.hostname.replace('preprod-', '');
 
-
   let qs;
   if (_st.url.query) {
     qs = querystring.parse(_st.url.query);
@@ -43,7 +42,6 @@ function * middleware (next) {
   _st.whitelabel = info.slug;
   _st.whitelabelInfo = info;
   _st.configs = configs;
-  _st.apiBaseUrl = configs.api.url;
   _st.cobrand = qs ? qs.cb : null;
   _st.queryString = qs;
   _st.defaultRegion = _.get(info, 'settings.defaultRegion');
@@ -61,7 +59,6 @@ function * middleware (next) {
       cobrand: _st.cobrand,
       desc: [_st.whitelabel, _st.region, _st.language].join('/')
     };
-    _st.defaultCurrencyForRegion = _.get(info, 'settings.region['+_st.region+'].currency', _st.defaultCurrency);
     _st.relativeUrl = (_st.url.pathname
       .replace('/' + _st.region + '/' + _st.language + '/', '/')
       .replace(/\/assets\/.+$/, '/') // specifically to fix assets/page.js, but probably good to do no matter what
@@ -86,16 +83,11 @@ function * middleware (next) {
       _st.canonicalUrl = _st.canonicalUrl.slice(0, -1);
     }
 
-
     this.set('Content-Language', _st.language + '-' + _st.region);
   }
 
   _st.pageData = {}; // any middleware can add to this
-
-  if(_st.isProd) {
-    //this.set('X-Frame-Options', 'SAMEORIGIN');
-    this.set('Content-Security-Policy', 'frame-ancestors \'self\' *.GETPAIDTOSHOP.US *.CASHBACKASSOCIATES.COM *.CASHBACKDONATIONS.ORG *.INTEGRION.US *.integrion.com *.10FREEDOLLARS.com *.10freedollars.com *.localhost *.LOCALHOST *.LOCALHOST:8080 *.localhost:8080;');
-  }
+  _st.siteSettings = {name: 'cat'}; // any middleware can add to this
 
   yield next;
 }
