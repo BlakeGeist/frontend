@@ -13,78 +13,88 @@
       >
     </div>
 
-  <form
-    data-collection-form="product"
+  <div
+    class="forms"
     >
 
-    <input
-      name="name"
-      placeholder="Name"
-      type="input"
-      />
+    <form
+      data-collection-form="product"
+      >
 
-    <input
-      name="url"
-      placeholder="url"
-      type="input"
-      />
+      <div class="form-heading mod-product">Create Product</div>
 
-    |
+      <input
+        name="name"
+        placeholder="Name"
+        type="input"
+        />
 
-    <input
-      type="submit"
-      value="submit"
-      />
+      <input
+        name="url"
+        placeholder="url"
+        type="input"
+        />
 
-  </form>
+      |
 
-  <hr />
+      <input
+        type="submit"
+        value="submit"
+        />
 
-  <form
-    data-string="create"
-    >
+    </form>
 
-    <input
-      name="slug"
-      placeholder="slug"
-      type="input"
-      />
+    <form
+      data-string="create"
+      >
 
-    <input
-      name="text"
-      placeholder="text"
-      type="input"
-      />
+      <div class="form-heading">Create Translated String</div>
 
-    |
+      <input
+        name="slug"
+        placeholder="slug"
+        type="input"
+        />
 
-    <input
-      type="submit"
-      value="submit"
-      />
+      <input
+        name="text"
+        placeholder="text"
+        type="input"
+        />
 
-  </form>
+      |
 
-  <form
-    data-product="import-from-csv"
-    enctype="multipart/form-data"
-    >
+      <input
+        type="submit"
+        value="submit"
+        />
 
-    <input
-      name="file"
-      type="file"
-      />
+    </form>
 
-    |
+    <form
+      data-product="import-from-csv"
+      enctype="multipart/form-data"
+      >
 
-    <input
-      type="submit"
-      value="submit"
-      />
+      <div class="form-heading">Upload products from csv</div>
 
-  </form>
+      <input
+        name="file"
+        type="file"
+        />
 
-  <p>{{translate 'BIG-TEXT-STRING'}}</p>
+      |
+
+      <input
+        type="submit"
+        value="submit"
+        />
+
+    </form>
+
+  </div>
+
+  <p>{{translate 'TEST-STRING'}}</p>
 
   <p>{{translate 'FACEBOOK'}}</p>
 

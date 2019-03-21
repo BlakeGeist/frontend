@@ -77,6 +77,7 @@ function * getAsyncFireMeta () {
     fireGlobalSettings: yield getFireDataItem('globalSiteSettings'),
     fireStrings: yield getFireDataItem('strings'),
     fireProducts: yield getFireDataItem('products'),
+    firePosts: yield getFireDataItem('posts'),
     fireSiteSettings: yield getSiteSettings()
   };
   return asyncMeta;
@@ -181,6 +182,7 @@ function * getTemplateArguments (extend) {
     fireBaseData: fireMeta.fireData,
     strings: fireMeta.fireStrings,
     products: fireMeta.fireProducts,
+    posts: fireMeta.firePosts,
     globalSiteSettings: fireMeta.fireGlobalSettings,
     siteSettings: fireMeta.fireSiteSettings,
     settings: {
