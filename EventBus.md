@@ -163,14 +163,6 @@ Here's what happens on page init, and how it'll affect you while writing compone
 * **me:refresh-tokens**: no arguments
   * force login to store/refresh/check-ttl-of tokens. shouldn't be much of a reason to call this directly.
 
-## "ui" Component Commands:
-  * **ui:merchant-cards:setup** and **ui:merchant-details:setup**: (arguments: containerElement)
-    * These do post-render setup for merchant list / detail pages.
-
-## "outclick" Component Commands:
-  * **outclick:start**: (arguments: object of format {merchant:someMerchantObj})
-    * Initiates an outclick.
-
 # Api Events:
 * For a full list of available api events, look in `src/__root__/js/system/api.js`; all api calls for the platform are defined there.
 * All defined api calls have the following regular events defined, where **[name]** is the name of the api call as passed to `site.api.register` in `api.js`. These events are handy if you want to respond to **every** time a particular api is called:

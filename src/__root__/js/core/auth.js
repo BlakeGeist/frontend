@@ -298,34 +298,6 @@
       return;
     }
 
-    //if the locOverride came from the merchant url, open the feedback modal for that merchant
-    if (locOverride && locOverride.indexOf("/m/") >= 0) {
-      var merchant;
-      merchant = site.context.data.merchant;
-      //C.run('modal:open', 'merchant-outclick-feedback', {
-      //  merchant: merchant
-      //});
-      var url = window.location.pathname;
-      //'/us/en/m/hotels-com-us/';
-      var path = url.split( '/' );
-      if(userregion){
-        path[1]=userregion;
-      }
-      if(userlang){
-        path[2]=userlang;
-      }
-      path=path.join('/');
-
-      C.runRemote('navigate:url',path);
-      return;
-    }
-
-    //if user comes from finalize, send home
-    if (locOverride && locOverride.indexOf("/u/finalize/") >= 0) {
-      C.run('navigate:home');
-      return;
-    }
-
     // This needs to be there to redirect the user to the current page after logging in
     if (locOverride) {
       if (locOverride == 'false') {
