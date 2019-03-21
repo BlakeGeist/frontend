@@ -58,6 +58,12 @@
       C.run('data:delete:collection-item', targetItem);
     });
 
+    $(document).on('submit', '[data-product="import-from-csv"]', function(event){
+      H.stopEvents(event);
+      var formData = H.getFormData(this);
+      console.log(formData.file)
+    });
+
     $(document).on('submit', '[data-string]', function(e){
       H.stopEvents(e);
       var formData = H.getFormData(this);

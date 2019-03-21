@@ -40,10 +40,11 @@
             console.log("Error getting document:", error);
         });
       } else {
-        // No user is signed in.
+        site.events.emit('me:loggedIn');
       }
     });
+    return site.context.userData2
   }
-  
+
   site.me = new Me();
 })(window, window.site);

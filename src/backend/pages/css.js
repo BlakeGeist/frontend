@@ -15,12 +15,8 @@ const packageRoot = path.resolve(__dirname, '../../..');
 const srcRoot = path.resolve(packageRoot, 'src/__root__');
 const lessRoot = path.resolve(srcRoot, 'less');
 
-
-
 function * middleware (next) {
   if (!this.state.page) return yield next;
-
-  console.log(this.state.siteSettings)
 
   var csasdf = {
     "@primaryColor": this.state.siteSettings.primaryColor,

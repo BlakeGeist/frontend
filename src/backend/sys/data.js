@@ -7,7 +7,6 @@ const request = require('request-promise');
 const threeWayCache = require('../lib/three-way-cache');
 const buildSettings = require('../lib/build-settings').buildSettings;
 const wait = require('co-waiter');
-const DEFAULT_PAGE_SIZE = 49;
 
 module.exports = setup;
 

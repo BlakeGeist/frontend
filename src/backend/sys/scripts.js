@@ -27,17 +27,13 @@ const VENDOR_JS = [
   'vendor/jquery.mobile',
   'vendor/jquery-ui',
   'vendor/jquery.lazy.min',
-  'vendor/jquery.inview',
-  'vendor/jquery.easy-autocomplete.min',
   'vendor/lodash',
   'vendor/eventemitter2',
   'vendor/basil',
   'vendor/jwt-decode',
   'vendor/handlebars',
   'vendor/swag',
-  'vendor/moment',
-  'vendor/collapsible',
-  'vendor/velocity.min',
+  'vendor/moment'
 ];
 const PLATFORM_JS = [
   'main',

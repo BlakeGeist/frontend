@@ -7,6 +7,37 @@ const logAndDefault = (desc, def, ctx) => error => { return def; };
 
 const firebase = require('firebase');
 const admin = require('firebase-admin');
+const db = admin.app().firestore();
+
+async function getFireDataItem(callTarget){
+  const fireData = {};
+  await db.collection(callTarget)
+    .get()
+    .then(query=>{
+        let data = query.docs.map(doc=>{
+            let x = doc.data()
+                x['_id']=doc.id;
+                return x;
+        })
+        _.extend(fireData, data);
+    })
+
+    var formatted = _.indexBy(fireData, '_id');
+
+  return formatted;
+}
+
+async function getSiteSettings (varients, slug) {
+  const fireData = {};
+  await db.collection('sites').doc('localhost')
+    .get()
+    .then(doc=>{
+      let data = doc.data();
+      _.extend(fireData, data);
+    })
+  return fireData;
+}
+
 
 function * getPageData () {
   const pageData = {};
@@ -42,13 +73,15 @@ function * getAsyncMeta () {
 
 function * getAsyncFireMeta () {
   const asyncMeta = yield {
-    fireData: this.fetch('proposals').catch(logAndDefault('proposals', [], this)),
-    fireStrings: this.fetch('strings').catch(logAndDefault('strings', [], this)),
-    fireProducts: this.fetch('products').catch(logAndDefault('products', [], this)),
-    fireSiteSettings: this.fetch('siteSettings').catch(logAndDefault('siteSettings', [], this))
+    fireData: yield getFireDataItem('proposals'),
+    fireGlobalSettings: yield getFireDataItem('globalSiteSettings'),
+    fireStrings: yield getFireDataItem('strings'),
+    fireProducts: yield getFireDataItem('products'),
+    fireSiteSettings: yield getSiteSettings()
   };
   return asyncMeta;
 }
+
  var languages = {
   // TODO: Do these need to be translated? Moved to template?
   'da': 'Dansk',
@@ -148,6 +181,7 @@ function * getTemplateArguments (extend) {
     fireBaseData: fireMeta.fireData,
     strings: fireMeta.fireStrings,
     products: fireMeta.fireProducts,
+    globalSiteSettings: fireMeta.fireGlobalSettings,
     siteSettings: fireMeta.fireSiteSettings,
     settings: {
       region: data.meta.region,
@@ -212,14 +246,11 @@ function getContextTime (interval) {
   return Math.floor(Date.now() / interval) * interval;
 }
 
-async function getSiteSettings (extend) {
-  const fireMeta = await extend.fetch('siteSettings').catch(logAndDefault('siteSettings', [], this));
-  return fireMeta
-}
 
 function setup (app) {
   app.use(function * (next) {
-    this.state.siteSettings = yield getSiteSettings(this);
+    this.state.globalSiteSettings = yield getFireDataItem('globalSiteSettings'),
+    this.state.siteSettings = yield getSiteSettings();
     this.getMeta = getMeta;
     this.getAsyncMeta = getAsyncMeta;
     this.getPageData = getPageData;

@@ -102,11 +102,6 @@
   }
 
   function deletePropsal(slug){
-    console.log(slug);
-    console.log(slug);
-    console.log(slug);
-    console.log(slug);
-    console.log(slug);
     db.collection("proposals").doc(slug).delete().then(function() {
       location.reload();
       console.log("Document successfully deleted!");
