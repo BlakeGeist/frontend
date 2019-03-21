@@ -110,7 +110,6 @@ function * getMeta () {
       dev: _st.env === 'dev',
       stripeKey: _.get(_st, 'configs.paymentGateways.stripe.api_key'),
       scriptTags: _.get(_st, 'SCRIPTS'),
-      defaultMerchantID: _.get(_st, 'configs.vipLounge.defaultMerchantID'),
       key: _.get(_st, 'configs.jwt.key'),
       hostname: _st.hostname
     }
@@ -183,7 +182,6 @@ function * getTemplateArguments (extend) {
       dev: data.meta.dev,
       currencies: data.meta.currencies,
       currenciesEnabled: data.meta.currenciesEnabled, // this is only a list of currencies codes. real currencies data is in lang.languages
-      defaultMerchantID: data.meta.defaultMerchantID,
       key: data.meta.key, //key to decrypt emails
       hostname: data.meta.hostname
     },

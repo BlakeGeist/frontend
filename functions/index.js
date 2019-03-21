@@ -60,7 +60,6 @@ exports.createString = functions.https.onRequest(async (request, response) => {
   })
 })
 
-
 function createStrings(stringText, slug){
   let string = {
     'en': stringText
