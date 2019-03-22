@@ -8,7 +8,6 @@
   site.commands.define('navigate:api', navigateToApi);
   site.commands.define('navigate:back', navigateBack);
   site.commands.define('navigate:home', navigateToHome);
-  site.commands.define('navigate:infinia-auth', navigateToRemoteUrl);
   site.commands.define('navigate:language', navigateToLanguage);
   site.commands.define('navigate:oauth', navigateToOAuth);
   site.commands.define('navigate:page', navigateToPage);
@@ -181,8 +180,6 @@
        referral =(window.location.search).substr(1);
     }
     console.log("result",referral);
-    ///signup/facebook?redirect_uri=https%3A%2F%2Fdev.dubli.com%2Fus%2Fen%2Fu%2Ffinalize%2F%3Ftype%3Dsignup&whitelabel=dubli
-    //var reff_url = 'utm_baid=1234&utm_content=78&utm_name=referral&utm_source=dubli&utm_medium=web';
 
     var path = ['', type, network].join('/') + '?redirect_uri=' + encodeURIComponent(redirectUri + '&' + referral) + '&whitelabel=' + site.context.settings.wl;
     site.commands.runRemote('navigate:api', path);

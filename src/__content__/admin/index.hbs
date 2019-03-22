@@ -12,55 +12,89 @@
       class="collections"
       data-role="toggle-admin-view"
       >
+
       <h2>Site Collections/Tables</h2>
+
       <form
         data-form-add="collection"
         >
-        <input type="text" name="collectionName" placeholder="collectionName"/>
-        <input type="submit" />
+
+        <input
+          name="collectionName"
+          placeholder="collectionName"
+          type="text"
+          />
+
+        <input
+          type="submit"
+          />
+
       </form>
+
     </section>
 
     <section
       class="strings"
       data-role="toggle-admin-view"
       >
+
       <h2>Strings</h2>
+
       <form
         data-string="create"
         >
-        <div class="form-heading">{{translate 'CREATE-TRANSLATED-STRING'}}</div>
+
+        <div
+          class="form-heading"
+          >
+
+          {{translate 'CREATE-TRANSLATED-STRING'}}
+
+        </div>
+
         <input
           name="slug"
           placeholder="slug"
           type="input"
           />
+
         <input
           name="text"
           placeholder="text"
           type="input"
           />
+
         |
+
         <input
           type="submit"
           value="submit"
           />
+
       </form>
+
       {{#each strings}}
+
         <div
           class="string"
           >
+
           <strong
             data-edit-string="{{@key}}"
             >
+
             {{@key}}:
+
           </strong>
+
         </div>
+
       {{/each}}
 
     </section>
 
   </div>
+
 </main>
 
 {{>templates/footer}}

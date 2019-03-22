@@ -44,13 +44,13 @@ var config = {
   storageBucket: "web-proposals.appspot.com",
   messagingSenderId: "907512529926"
 };
+
 firebase.initializeApp(config);
 
 async function getUser (varients, slug) {
   var user = firebase.auth().currentUser;
   return user
 }
-
 
 function * getPageData () {
   const pageData = {};

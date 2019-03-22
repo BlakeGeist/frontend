@@ -127,8 +127,7 @@ Here's what happens on page init, and how it'll affect you while writing compone
   * returnUrl is the url that the user will be redirected to after authentication. This is stored in localStorage and passed to **navigate:url** after a successful auth
 * **navigate:remote**: (arguments: s_url)
   * navigate to a url on a different server. Using this is preferred over window.location=s_url (even though this is currently what's done under the hood)
-* **navigate:infinia-auth**: (arguments: s_url)
-  * starts an infinia auth section. currently does the same thing as navigate:remote but infinia auth should be using this event for cleanliness's sake.
+
 
 ## Modal Commands:
 * **modal:close**: no arguments

@@ -38,4 +38,4 @@
   } catch (e) {
     return false;
   }
-})(document.documentElement, window, window.location.search, window.location.hash, window.localStorage && window.localStorage.getItem.bind(window.localStorage), 'high', 'low', 'Ominto.X-Auth-', 'Token', 'Ominto.historic-user');
+})(document.documentElement, window, window.location.search, window.location.hash, window.localStorage && window.localStorage.getItem.bind(window.localStorage), 'high', 'low', 'Site.X-Auth-', 'Token', 'Site.historic-user');

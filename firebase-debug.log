@@ -1,38 +1,35 @@
-[debug] [2019-03-22T08:26:39.589Z] ----------------------------------------------------------------------
-[debug] [2019-03-22T08:26:39.592Z] Command:       /Users/BGeist/.nvm/versions/node/v10.13.0/bin/node /Users/BGeist/.nvm/versions/node/v10.13.0/bin/firebase serve
-[debug] [2019-03-22T08:26:39.592Z] CLI Version:   6.1.2
-[debug] [2019-03-22T08:26:39.592Z] Platform:      darwin
-[debug] [2019-03-22T08:26:39.592Z] Node Version:  v10.13.0
-[debug] [2019-03-22T08:26:39.593Z] Time:          Fri Mar 22 2019 01:26:39 GMT-0700 (Pacific Daylight Time)
-[debug] [2019-03-22T08:26:39.593Z] ----------------------------------------------------------------------
+[debug] [2019-03-22T22:00:33.045Z] ----------------------------------------------------------------------
+[debug] [2019-03-22T22:00:33.051Z] Command:       /Users/BGeist/.nvm/versions/node/v10.13.0/bin/node /Users/BGeist/.nvm/versions/node/v10.13.0/bin/firebase serve
+[debug] [2019-03-22T22:00:33.051Z] CLI Version:   6.1.2
+[debug] [2019-03-22T22:00:33.051Z] Platform:      darwin
+[debug] [2019-03-22T22:00:33.051Z] Node Version:  v10.13.0
+[debug] [2019-03-22T22:00:33.052Z] Time:          Fri Mar 22 2019 15:00:33 GMT-0700 (Pacific Daylight Time)
+[debug] [2019-03-22T22:00:33.052Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2019-03-22T08:26:39.609Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-03-22T08:26:39.610Z] > authorizing via signed-in user
-[debug] [2019-03-22T08:26:39.610Z] [iam] checking project web-proposals for permissions ["firebase.projects.get"]
-[debug] [2019-03-22T08:26:39.613Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] [2019-03-22T08:26:39.614Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
- <request body omitted>
-[debug] [2019-03-22T08:26:40.006Z] <<< HTTP RESPONSE 200
-[debug] [2019-03-22T08:26:40.017Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/web-proposals:testIamPermissions  
+[debug] [2019-03-22T22:00:33.067Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-03-22T22:00:33.067Z] > authorizing via signed-in user
+[debug] [2019-03-22T22:00:33.067Z] [iam] checking project web-proposals for permissions ["firebase.projects.get"]
+[debug] [2019-03-22T22:00:33.072Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/web-proposals:testIamPermissions  
 
-[debug] [2019-03-22T08:26:40.264Z] <<< HTTP RESPONSE 200
-[debug] [2019-03-22T08:26:40.268Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/web-proposals  
+[debug] [2019-03-22T22:00:33.523Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-22T22:00:33.525Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/web-proposals  
  
-[debug] [2019-03-22T08:26:40.491Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-22T22:00:34.061Z] <<< HTTP RESPONSE 200
 [info] 
 [info] === Serving from '/Users/BGeist/Documents/blakes-apps/frontend'...
 [info] 
 [info] i  functions: Preparing to emulate functions.
-[debug] [2019-03-22T08:26:41.251Z] Fetching environment
-[debug] [2019-03-22T08:26:41.254Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/907512529926:getServerAppConfig  
+[debug] [2019-03-22T22:00:34.548Z] Fetching environment
+[debug] [2019-03-22T22:00:34.552Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/907512529926:getServerAppConfig  
  
-[debug] [2019-03-22T08:26:41.254Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/907512529926/clients/_:getWebAppConfig  
+[debug] [2019-03-22T22:00:34.553Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/907512529926/clients/_:getWebAppConfig  
  
-[debug] [2019-03-22T08:26:41.535Z] <<< HTTP RESPONSE 200
-[debug] [2019-03-22T08:26:41.535Z] Starting @google-cloud/functions-emulator
-[debug] [2019-03-22T08:26:41.604Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-22T22:00:34.746Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-22T22:00:34.747Z] Starting @google-cloud/functions-emulator
+[debug] [2019-03-22T22:00:34.804Z] <<< HTTP RESPONSE 200
 [info] i  hosting: Serving hosting files from: public
 [info] ✔  hosting: Local server: http://localhost:5000
-[debug] [2019-03-22T08:26:43.088Z] Parsing function triggers
-[info] ✔  functions: createSiteCollection: http://localhost:5001/web-proposals/us-central1/createSiteCollection
+[debug] [2019-03-22T22:00:36.299Z] Parsing function triggers
 [info] ✔  functions: createString: http://localhost:5001/web-proposals/us-central1/createString
+[info] ✔  functions: authSignIn: http://localhost:5001/web-proposals/us-central1/authSignIn
+[info] ✔  functions: createSiteCollection: http://localhost:5001/web-proposals/us-central1/createSiteCollection

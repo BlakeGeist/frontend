@@ -23,7 +23,7 @@
   function userCheck() {
     USER = site.context.userData2;
     if(USER){
-      C.run('navigate:home');
+      //C.run('navigate:home');
     }
   }
 
@@ -58,24 +58,6 @@
       C.run('modal:open', 'edit-string', {
         string: ordered
       })
-    });
-
-    $(document).on('click', '[data-role="toggle-admin-view"]', function(event){
-      H.stopEvents(event);
-      $(this).toggleClass('is-active');
-    });
-
-    $(document).on('click', '[data-role="toggle-string"]', function(event){
-      H.stopEvents(event);
-      $(this).closest('.string').toggleClass('is-active');
-    });
-
-    $(document).on('click', '.is-active', function(e){
-      H.stopEvents(e);
-    })
-
-    $(document).on('click', 'html', function(e){
-      $('.is-active').removeClass('is-active');
     });
 
     $(document).on('submit', '[data-strings-edit]', function(e){

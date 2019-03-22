@@ -8,74 +8,11 @@
 
     <h1>{{siteSettings.name}}</h1>
 
-    <div
-      data-target="account-info"
-      >
+    <div>
+
+      <p>This is the homepage</p>
+
     </div>
-
-  <div
-    class="forms"
-    >
-
-    <form
-      data-collection-form="product"
-      >
-
-      <div class="form-heading mod-product">{{translate 'CREATE-PRODUCT'}}</div>
-
-      <input
-        name="name"
-        placeholder="Name"
-        type="input"
-        />
-
-      <input
-        name="url"
-        placeholder="url"
-        type="input"
-        />
-
-      |
-
-      <input
-        type="submit"
-        value="submit"
-        />
-
-    </form>
-
-    <form
-      data-product="import-from-csv"
-      enctype="multipart/form-data"
-      >
-
-      <div class="form-heading">{{translate 'UPLOAD-PRODUCTS-FROM-CSV'}}</div>
-
-      <input
-        name="file"
-        type="file"
-        />
-
-      |
-
-      <input
-        type="submit"
-        value="submit"
-        />
-
-    </form>
-
-  </div>
-
-  <hr />
-
-  {{#each products}}
-
-    <p>{{translate 'NAME'}}: <a href="/{{../settings.region}}/{{../settings.language}}/product/{{slug}}">{{name}}</a> | <a href="" data-collection-delete-taraget="{{slug}}">delete</a></p>
-
-  {{/each}}
-
-  <hr />
 
   </div>
 

@@ -76,12 +76,12 @@
   }
 
   function setupStorage (obj) {
-    var _storage = new Basil({ storages: ['local', 'cookie'], namespace: 'Ominto' });
-    _storage.session = new Basil({storages: ['session'], namespace: 'Ominto-Session'});
-    _storage.memory = new Basil({storages: ['memory'], namespace: 'Ominto'});
+    var _storage = new Basil({ storages: ['local', 'cookie'], namespace: 'Site' });
+    _storage.session = new Basil({storages: ['session'], namespace: 'Site-Session'});
+    _storage.memory = new Basil({storages: ['memory'], namespace: 'Site'});
 
     // normally you won't ever access this directly. use site.uiPreferences instead.
-    _storage._uiPrefs = new Basil({storages: ['session'], namespace: 'Ominto-UI-Preferences'});
+    _storage._uiPrefs = new Basil({storages: ['session'], namespace: 'Site-UI-Preferences'});
     obj.storage = _storage;
   }
 
@@ -171,20 +171,12 @@
 
   function defineKeys (obj) {
     var keys = {};
-    keys.recentlyRegisteredEmail = 'recently-registered-email';
     keys.postAuthRedirect = 'post-auth-redirect-location';
     keys.postAuthOverride = 'post-auth-redirect-override';
     keys.userDetailsCache = 'cached-user-details-object';
-    keys.withdrawalMethodsCache = 'cached-withdrawal-methods';
-    keys.dwollaAccessToken = 'cached-dwolla-access-token';
     keys.coinbaseAccessToken = 'cached-coinbase-access-token';
     keys.historicToken = 'historic-user';
     keys.lastOAuthType = 'last-oauth-type';
-    keys.mallId = 'mall-id';
-    keys.mallName= 'mall-name';
-    keys.mallAgentFname = 'mall-agent-first-name';
-    keys.mallAgentLname = 'mall-agent-last-name';
-    keys.mallAgentLoginTimestampt = 'mall-agent-login-timestampt';
     keys.forceUncachedMe = 'needs-fresh-self-data';
     obj.keys = keys;
   }
