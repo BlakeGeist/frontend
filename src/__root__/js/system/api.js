@@ -19,7 +19,22 @@
     options: 'OPTIONS'
   };
 
+  var apiRoot = 'https://us-central1-web-proposals.cloudfunctions.net/';
+  if(window.location.hostname == 'localhost'){
+    apiRoot = 'http://localhost:5001/web-proposals/us-central1/'
+  }
 
+  site.api.register('create:collection', createColleciton);
+  function createColleciton(params, success, error, complete) {
+    var apiCall = ('createSiteCollection').toString();
+    return this.api(httpMethod.get, apiCall, params, success, error, complete);
+  }
+
+  site.api.register('create:string', createString);
+  function createString(params, success, error, complete) {
+    var apiCall = ('createString').toString();
+    return this.api(httpMethod.get, apiCall, params, success, error, complete);
+  }
 
   function setupApi () {
     var _api = {
@@ -43,22 +58,22 @@
       site.commands.define('api:' + name, apiCall);
       return;
       function ajaxParams (type, url, params, success, error, complete, extend) {
-        var headers = _.extend(site.me.authHeaders(), {
-          'x-appwl': site.context.settings.wl
-        });
+        //var headers = _.extend(site.me.authHeaders(), {
+          //'x-appwl': 'localhost'
+        //});
         if (!type) type = httpMethod.get;
         var obj = {
           type: type,
-          url: site.context.settings.api + '/' + url.replace(/^\/+/, ''),
+          url: apiRoot + url.replace(/^\/+/, ''),
           data: type === httpMethod.get ? $.param(params || {}) : JSON.stringify(params),
           processData: false,
           contentType: 'application/json',
           dataType: 'json',
           // cache: false,
           xhrFields: {
-            withCredentials: true
+            withCredentials: false
           },
-          headers: headers,
+          //headers: headers,
           crossDomain: true,
           success: _makeCallback('response', success),
           error: _makeCallback('error', error),

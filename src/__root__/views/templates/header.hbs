@@ -2,13 +2,19 @@
 
   <div class="container">
 
-    <nav>
+    <div class="logo">
 
       <a
         href="/{{settings.region}}/{{settings.language}}"
         >
         {{translate 'HOME'}}
       </a>
+
+    </div>
+
+    <div>
+
+    <div class="menu-items">
 
       <a
         class="mod-logged-out"
@@ -17,11 +23,13 @@
         {{translate 'LOGIN'}}
       </a>
 
+      <span class="mod-logged-out">|</span>
+
       <a
         class="mod-logged-out"
         href="/{{settings.region}}/{{settings.language}}/register/"
         >
-        {{translate 'REGISTER'}}
+        {{translate 'SIGN-UP'}}
       </a>
 
       <a
@@ -32,7 +40,7 @@
         {{translate 'SIGN-OUT'}}
       </a>
 
-    </nav>
+    </div>
 
   </div>
 

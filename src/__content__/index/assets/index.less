@@ -1,16 +1,9 @@
 @import 'context';
-html{
-  color: @main-text;
-}
-
-h1{
-  color: @primaryColor;
-}
-
 .layout-1{
   .forms {
     .flex-display;
     .justify-content(space-between);
+    .flex-wrap(wrap);
     border: 1px dashed purple;
   }
   .form-heading{
@@ -31,6 +24,7 @@ h1{
   .forms {
     .flex-display;
     .flex-direction(column);
+    .flex-wrap(wrap);
     .justify-content(space-between);
     border: 1px dashed pink;
   }
@@ -40,4 +34,7 @@ h1{
       color: @secondaryColor;
     }
   }
+}
+h1{
+  color: @primaryColor;
 }

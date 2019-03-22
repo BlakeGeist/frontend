@@ -25,12 +25,25 @@ const cors = require('cors')({
   origin: true
 });
 
-exports.helloWorld = functions.https.onRequest((req, res) => {
+exports.createSiteCollection = functions.https.onRequest((req, res) => {
     cors(req, res, () => {
-      console.log("req.body :", JSON.stringify(req.body)); // Your data should be available here
-      console.log("req.query :", JSON.stringify(req.query)); // Maybe check request.query too
-      console.log(req.query)
-      res.status(200).send({text: 'TEXT'});
+      var collection = req.query.collectionName;
+      var firstDoc = {
+        name: 'first'
+      }
+      var newCollection = {
+        collection: collection
+      }
+
+      newCollection[collection] = firstDoc
+
+      db.collection('sites').doc('localhost').update(newCollection)
+        .then(function() {
+          res.status(200).send({collectionCreated: 'created ' + collection + ' in site localhost'});
+        })
+        .catch(function(error) {
+          res.status(500).send(error)
+        });
     });
 });
 
@@ -38,10 +51,10 @@ exports.helloWorld = functions.https.onRequest((req, res) => {
 //check the database for if the slug already exists
 //if it does, this should prolly be an update function
 //if the string does not exist, run the createString funciton
-exports.createString = functions.https.onRequest(async (request, response) => {
-   cors(request, response, () => {
-    var slug = request.query.slug;
-    var text = request.query.text;
+exports.createString = functions.https.onRequest(async (req, res) => {
+   cors(req, res, () => {
+    var slug = req.query.slug;
+    var text = req.query.text;
     try {
       var existingDoc = stringsCollection.doc(slug).get();
       var docExists = existingDoc.exists
@@ -50,12 +63,12 @@ exports.createString = functions.https.onRequest(async (request, response) => {
       } else {
         console.log(slug, text)
         createStrings(text, slug)
-        response.status(200).send({text: 'TEXT'});
+        res.status(200).send({text: 'TEXT'});
       }
     }
     catch (error){
       console.log(error)
-      response.status(500).send(error)
+      res.status(500).send(error)
     }
   })
 })

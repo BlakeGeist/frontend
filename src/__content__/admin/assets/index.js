@@ -28,7 +28,61 @@
   }
 
   function ready(){
+    $(document).on('submit', '[data-form-add="collection"]', function(event) {
+      H.stopEvents(event);
+      var formData = H.getFormData(this);
+      console.log(formData);
+      if(!formData.collectionName){
+        alert('enter a collection name');
+        return;
+      }
+      C.run('api:create:collection', formData);
+    });
 
+    $(document).on('submit', '[data-string]', function(e){
+      H.stopEvents(e);
+      var formData = H.getFormData(this);
+      C.run('api:create:string', formData);
+    });
+
+    $(document).on('click', '[data-edit-string]', function(e){
+      H.stopEvents(e);
+      var slug = $(this).data('edit-string');
+      var strings = site.context.strings;
+      var string = strings[slug];
+      const ordered = {};
+      Object.keys(string).sort().forEach(function(key) {
+        ordered[key] = string[key];
+      });
+
+      C.run('modal:open', 'edit-string', {
+        string: ordered
+      })
+    });
+
+    $(document).on('click', '[data-role="toggle-admin-view"]', function(event){
+      H.stopEvents(event);
+      $(this).toggleClass('is-active');
+    });
+
+    $(document).on('click', '[data-role="toggle-string"]', function(event){
+      H.stopEvents(event);
+      $(this).closest('.string').toggleClass('is-active');
+    });
+
+    $(document).on('click', '.is-active', function(e){
+      H.stopEvents(e);
+    })
+
+    $(document).on('click', 'html', function(e){
+      $('.is-active').removeClass('is-active');
+    });
+
+    $(document).on('submit', '[data-strings-edit]', function(e){
+      H.stopEvents(e);
+      var formData = H.getFormData(this);
+      console.log(formData);
+    })
   }
 
 })(window, window.site, window.jQuery);

@@ -21,9 +21,7 @@ async function getFireDataItem(callTarget){
         })
         _.extend(fireData, data);
     })
-
     var formatted = _.indexBy(fireData, '_id');
-
   return formatted;
 }
 
@@ -38,14 +36,26 @@ async function getSiteSettings (varients, slug) {
   return fireData;
 }
 
+var config = {
+  apiKey: "AIzaSyDriZIhBxf7qF73SUOR-wDBHMceP5w7Rss",
+  authDomain: "web-proposals.firebaseapp.com",
+  databaseURL: "https://web-proposals.firebaseio.com",
+  projectId: "web-proposals",
+  storageBucket: "web-proposals.appspot.com",
+  messagingSenderId: "907512529926"
+};
+firebase.initializeApp(config);
+
+async function getUser (varients, slug) {
+  var user = firebase.auth().currentUser;
+  return user
+}
+
 
 function * getPageData () {
   const pageData = {};
-
   const configFile = _.get(this.state, 'page.assets.config[0].fullPath');
-
   const config = configFile ? JSON.parse(yield fs.readFile(configFile, 'utf8')) : {};
-
   const promises = {};
   for (let k in config) {
     if (config[k].remote) {
@@ -54,15 +64,12 @@ function * getPageData () {
       promises[k] = Promise.resolve(config[k]);
     }
   }
-
   try {
     _.extend(pageData, yield promises);
   } catch (e) {}
   _.extend(pageData, this.state.pageData);
-
   return pageData;
 }
-
 
 function * getAsyncMeta () {
   const asyncMeta = yield {
@@ -78,7 +85,8 @@ function * getAsyncFireMeta () {
     fireStrings: yield getFireDataItem('strings'),
     fireProducts: yield getFireDataItem('products'),
     firePosts: yield getFireDataItem('posts'),
-    fireSiteSettings: yield getSiteSettings()
+    fireSiteSettings: yield getSiteSettings(),
+    fireUser: yield getUser()
   };
   return asyncMeta;
 }
@@ -185,6 +193,7 @@ function * getTemplateArguments (extend) {
     posts: fireMeta.firePosts,
     globalSiteSettings: fireMeta.fireGlobalSettings,
     siteSettings: fireMeta.fireSiteSettings,
+    fireUser: fireMeta.fireUser,
     settings: {
       region: data.meta.region,
       language: data.meta.language,
@@ -240,14 +249,12 @@ function * getTemplateArguments (extend) {
       languages: languages
     }
   };
-
   return tplArgs;
 }
 
 function getContextTime (interval) {
   return Math.floor(Date.now() / interval) * interval;
 }
-
 
 function setup (app) {
   app.use(function * (next) {

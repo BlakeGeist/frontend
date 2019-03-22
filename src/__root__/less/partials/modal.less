@@ -32,37 +32,35 @@ body {
 }
 
 .modal {
+  .flex(0 1 375px);
   cursor: default;
   overflow: hidden;
   position: relative;
   border: 0;
   margin: 0 auto;
   z-index: 1010;
+  padding: 15px 25px;
+  display: none;
   .body {
     overflow: hidden;
   }
-
-  #withdrawal-inrneft {
-    .button-wrapper {
-      padding-top: 2.5rem;
-    }
-  }
 }
 
-.modal {
-  display: none;
-  &.active {
+.has-modal {
+  .modal {
+    background-color: #fff;
+    border-radius: 5px;
     display: block;
-    float: none;
     margin:0;
+    input{
+      box-sizing : border-box;
+      width: 100%;
+    }
   }
 }
 
-div.modal {
-  padding: 3rem;
-  header {
-    h2 {
-      margin-top: 0;
-    }
-  }
+.modal-close{
+  .align-items(center);
+  .flex-display;
+  .justify-content(space-between);
 }

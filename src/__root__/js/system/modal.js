@@ -22,6 +22,7 @@
   }
 
   function initializeCommands(){
+    C.define('modal:open:element', openModalElement);
     C.define('modal:open', openModalTemplate);
     C.define('modal:close', closeModal);
   }
@@ -31,13 +32,13 @@
   }
 
   function ready() {
-    //general open modal
     $(document).on('click', '[data-open-modal]', function(event) {
       H.stopEvents(event)
       var target = $(this).data('open-modal');
       C.run('modal:open', target);
     });
   }
+
 
   function openModalTemplate (tplName, data, ready) {
     var html = $('html');
@@ -47,13 +48,13 @@
     var tpl = site.partials['templates/modals/' + tplName];
     if (!tpl) return;
     var tplArgs = _.extend(_.omit(site.context, 'data'), {
-      data: data,
-      currentUser: site.me.getDetails()
+      data: data
+      //currentUser: site.me.getDetails()
     });
 
     var compiled = "<div class='modal' id='modal-" + tplName + "'>" + tpl(tplArgs) + '</div>';
     var $modal = $(compiled);
-    // $modal.appendTo($body);
+    console.log($modal)
     $modal.appendTo('#modalBackdrop');
     $('#modalBackdrop').addClass(tplName + '-modal');
 
@@ -86,10 +87,14 @@
     if (id) E.emit('modal:did-close:' + id, modal);
   }
 
+  function openModalElement (selector, params) {
+    var $elem = $(selector);
+    openModal($elem, params);
+  }
+
   function openModal (modal, params) {
     var id = modal.attr('id').replace(/^modal-/, '');
     state.activeModal = modal;
-
     modal.on('click', function (e) {
       // prevent clicks on the modal from propagating up to the modal backdrop.
       // we do this because the modal backdrop serves to both perform as a modal
@@ -97,7 +102,22 @@
       e.stopPropagation();
     });
 
+    modal.find('[data-role=modal-close]').off('click').on('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      C.run('modal:close');
+    });
+
     $html.addClass('has-modal');
+
+    setTimeout(function () {
+      if (modal.is('iframe')) E.emitIframe(modal, 'modal:did-open:self', id, params);
+      E.emit('modal:did-open', modal, params);
+      E.emit('modal:did-open:' + id, modal, params);
+      $html.addClass('modal-ready');
+      modal.addClass('active');
+    }, 0);
+
   }
 
 })(window, window.site, window.Handlebars);

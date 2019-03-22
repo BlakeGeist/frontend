@@ -4,11 +4,20 @@
 
 <main class="register-page">
 
-  <h1>Sign Up</h1>
-  {{>
-    partials/forms/email-pass
-    mod="sign-up"
-  }}
+  <div class="flex-center">
+
+    <div class="auth-form-container">
+
+      <h1>{{translate 'SIGN-UP'}}</h1>
+      
+      {{>
+        partials/forms/email-pass
+        mod="sign-up"
+      }}
+
+    </div>
+
+  </div>
 
 </main>
 

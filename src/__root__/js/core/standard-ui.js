@@ -64,25 +64,22 @@
       console.log(formData.file)
     });
 
-    $(document).on('submit', '[data-string]', function(e){
-      H.stopEvents(e);
-      var formData = H.getFormData(this);
-      $.ajax({
-        url: 'https://us-central1-web-proposals.cloudfunctions.net/createString',
-        dataType: "json",
-        type: 'GET',
-        data: formData,
-        success: function (data) {
-            console.log("Got data", data);
-        },
-        error: function (xhr, status, error) {
-            console.log('Error: ' + JSON.stringify(error));
-            console.log('status: ' + status);
-        },
-      });
+    $('html').on('keyup', function (event) {
+      if (event.keyCode === 27) {
+        var alreadyOpenModal = $('.modal.active').html();
+        if (alreadyOpenModal) {
+          C.run('modal:close');
+        }
+        // if escape is pressed remove all is-active css tags
+        $('.is-active').removeClass('is-active');
+      }
     });
 
-
+    $('#modalBackdrop').on('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      C.run('modal:close');
+    });
   }
 
   function initUIForUser(user) {
