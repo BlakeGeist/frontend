@@ -5,70 +5,49 @@
   var tokenTypes = 'admin high low anonymous'.split(' '); // this is also the precedence order for .authLevel()
 
   function Me () {
-    var config = {
-      apiKey: "AIzaSyDriZIhBxf7qF73SUOR-wDBHMceP5w7Rss",
-      authDomain: "web-proposals.firebaseapp.com",
-      databaseURL: "https://web-proposals.firebaseio.com",
-      projectId: "web-proposals",
-      storageBucket: "web-proposals.appspot.com",
-      messagingSenderId: "907512529926"
-    };
-    firebase.initializeApp(config);
 
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        var prettyUser = {
-          email: user.email,
-          emailVerified: user.emailVerified,
-          phoneNumber: user.phoneNumber,
-          uid: user.uid
-        }
-        site.context.userData2 = prettyUser;
-        console.log(prettyUser)
-        site.events.emit('me:loggedIn');
-        var db = firebase.firestore();
-        var file = db.collection("userAttrs").doc(prettyUser.uid)
-        file.get().then(function(doc) {
-          if (doc.exists) {
-              _.extend(site.context.userData2, doc.data());
-          } else {
-              console.log("No user attrs!");
-          }
-          site.events.emit('me:loggedIn:attrs:complete');
-          console.log(site.context.userData2);
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
-      } else {
-        site.events.emit('me:loggedIn');
-      }
-    });
+
+    var user = site.storage.get('siteUser');
+
+    if(user) {
+      $('html').removeClass('logged-out');
+      $('html').addClass('logged-in');
+    }
 
     this._user = null;
     this.loggedIn = false;
     this._tokens = initTokens();
     this._initial = true;
 
-    site.commands.define('me:fetch-details', function () {
-      site.commands.run('api:me:fetch');
-    });
+    //site.commands.define('me:fetch-details', function () {
+      //site.commands.run('api:me:fetch');
+    //});
 
-    site.commands.define('me:logout', _doLogout.bind(this));
-    site.commands.define('me:logout-auto', _doLogoutAuto.bind(this));
-    site.commands.define('me:login', _doLogin.bind(this));
-    site.commands.define('me:drop-high-token', _dropHighToken.bind(this));
-    site.commands.define('me:refresh-tokens', _refreshTokens.bind(this));
-    site.commands.define('me:update', _doMeUpdate.bind(this));
-    site.commands.define('me:break-details-cache', _breakApiCacheForUserDetails);
+    //site.commands.define('me:logout', _doLogout.bind(this));
+    //site.commands.define('me:logout-auto', _doLogoutAuto.bind(this));
+    //site.commands.define('me:login', _doLogin.bind(this));
+    //site.commands.define('me:drop-high-token', _dropHighToken.bind(this));
+    //site.commands.define('me:refresh-tokens', _refreshTokens.bind(this));
+    //site.commands.define('me:update', _doMeUpdate.bind(this));
+    //site.commands.define('me:break-details-cache', _breakApiCacheForUserDetails);
 
-    site.events.on('api:complete:auth:global:logout', _refreshTokens.bind(this, { admin: null, low: null, high: null }));
-    site.events.on('api:complete:auth:global:logout-auto', _refreshTokens.bind(this, { admin: null, low: null, high: null, smile: true }));
+    //site.events.on('api:complete:auth:global:logout', _refreshTokens.bind(this, { admin: null, low: null, high: null }));
+    //site.events.on('api:complete:auth:global:logout-auto', _refreshTokens.bind(this, { admin: null, low: null, high: null, smile: true }));
 
     // always respond to all api.getMe() calls.
-    site.events.on('api:response:me:fetch', _getMeResponse.bind(this));
-    site.events.on('api:error:me:fetch', _getMeError.bind(this));
-    _readTokens.call(this); // doesn't need to wait until ready
-    site.events.on('global:init', _refreshTokens.bind(this));
+    //site.events.on('api:response:me:fetch', _getMeResponse.bind(this));
+    //site.events.on('api:error:me:fetch', _getMeError.bind(this));
+    //_readTokens.call(this); // doesn't need to wait until ready
+    //site.events.on('global:init', _refreshTokens.bind(this));
+
+    site.events.on('api:complete:auth:sign-in-with-token', function(xhr){
+      if(site.helpers.is2XX(xhr)) {
+        site.me._user = xhr.responseJSON.user;
+        console.log(site.me._user)
+      } else {
+        console.log('this errored', xhr)
+      }
+    })
   }
 
     var _me = Me.prototype;
@@ -233,6 +212,8 @@
       var self = this;
       var previousUser = this._user;
 
+      console.log(obj);
+
       tokenTypes.forEach(function (t) {
         // explicitly check against undefined so things can pass 'null' to clear tokens
         self._tokens[t] = tokenData(typeof obj[t] !== 'undefined' ? obj[t] : self._tokens[t]);
@@ -240,6 +221,9 @@
       });
 
       _storeTokens.call(this);
+
+      console.log(this);
+      console.log('find me');
 
       var cur = this.authLevel();
       var shouldGetInfo = false;

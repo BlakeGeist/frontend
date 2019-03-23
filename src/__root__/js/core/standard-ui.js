@@ -33,17 +33,6 @@
 
   function initEvents() {
     E.on('global:ready', ready);
-    E.on('me:loggedIn', setUserData);
-  }
-
-  function setUserData(){
-    var user = site.context.userData2;
-    var template = H.renderPartial('account-info', user);
-    $('[data-target="account-info"]').html(template);
-    if(user){
-      $('html').removeClass('logged-out');
-      $('html').addClass('logged-in');
-    }
   }
 
   function ready() {

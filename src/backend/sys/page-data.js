@@ -25,7 +25,7 @@ async function getFireDataItem(callTarget){
   return formatted;
 }
 
-async function getSiteSettings (varients, slug) {
+var fireSettings = async function getSiteSettings (varients, slug) {
   const fireData = {};
   await db.collection('sites').doc('localhost')
     .get()
@@ -48,8 +48,6 @@ var config = {
 firebase.initializeApp(config);
 
 async function getUser (varients, slug) {
-  var user = firebase.auth().currentUser;
-  return user
 }
 
 function * getPageData () {
@@ -85,7 +83,7 @@ function * getAsyncFireMeta () {
     fireStrings: yield getFireDataItem('strings'),
     fireProducts: yield getFireDataItem('products'),
     firePosts: yield getFireDataItem('posts'),
-    fireSiteSettings: yield getSiteSettings(),
+    fireSiteSettings: yield fireSettings(),
     fireUser: yield getUser()
   };
   return asyncMeta;
@@ -152,7 +150,7 @@ function * getMeta () {
       dev: _st.env === 'dev',
       stripeKey: _.get(_st, 'configs.paymentGateways.stripe.api_key'),
       scriptTags: _.get(_st, 'SCRIPTS'),
-      key: _.get(_st, 'configs.jwt.key'),
+      key: _.get(_st, 'configs.jwt'),
       hostname: _st.hostname
     }
   );
@@ -258,8 +256,8 @@ function getContextTime (interval) {
 
 function setup (app) {
   app.use(function * (next) {
-    this.state.globalSiteSettings = yield getFireDataItem('globalSiteSettings'),
-    this.state.siteSettings = yield getSiteSettings();
+    //this.state.globalSiteSettings = yield getFireDataItem('globalSiteSettings'),
+    //this.state.siteSettings = yield getSiteSettings();
     this.getMeta = getMeta;
     this.getAsyncMeta = getAsyncMeta;
     this.getPageData = getPageData;

@@ -7,33 +7,18 @@
   var remove = function (cl) { mod('filter', function (x) { return x !== cl; }); };
   var toggle = function (cond, cl) { (cond ? add : remove)(cl); };
 
+  var config = {
+    apiKey: "AIzaSyDriZIhBxf7qF73SUOR-wDBHMceP5w7Rss",
+    authDomain: "web-proposals.firebaseapp.com",
+    databaseURL: "https://web-proposals.firebaseio.com",
+    projectId: "web-proposals",
+    storageBucket: "web-proposals.appspot.com",
+    messagingSenderId: "907512529926"
+  };
+  firebase.initializeApp(config);
+  
   try {
     window.site = {};
-    var isIframe = site.isIframe = (window !== window.parent) || (hash.indexOf('#i=1') === 0 || search.split('&').indexOf('i=1') > -1);
-    var highToken = get(auth + high + token);
-    var lowToken = get(auth + low + token);
-    var historicToken = get(htoken);
-    var hasHigh = !!(highToken && highToken !== 'null');
-    var hasLow = !!(lowToken && lowToken !== 'null');
-    var hasHistoric = !!(historicToken && historicToken !== 'null');
-    var hasTokens = !!(hasHigh || hasLow);
-
-    var authState = 'authstate-' + (
-      /* eslint-disable */
-      hasHigh       ? high :
-      hasLow        ? low  :
-      hasHistoric   ? 'historic' :
-      'anonymous'
-      /* eslint-enable */
-    );
-
-    add(authState);
-    toggle(hasTokens, 'logged-in');
-    toggle(!hasTokens, 'logged-out');
-    toggle(isIframe, 'is-iframe');
-    toggle(hasHistoric, 'token-historic');
-    toggle(hasHigh, 'token-high');
-    toggle(hasLow, 'token-low');
 
   } catch (e) {
     return false;

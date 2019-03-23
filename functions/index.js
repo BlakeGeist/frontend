@@ -9,6 +9,17 @@ admin.initializeApp({
 const database = admin.database();
 var adminFirestore = admin.app().firestore();
 
+var config = {
+    apiKey: "AIzaSyDriZIhBxf7qF73SUOR-wDBHMceP5w7Rss",
+    authDomain: "web-proposals.firebaseapp.com",
+    databaseURL: "https://web-proposals.firebaseio.com",
+    projectId: "web-proposals",
+    storageBucket: "web-proposals.appspot.com",
+    messagingSenderId: "907512529926"
+  };
+
+firebase.initializeApp(config);
+
 var languages = [
   'ar','da','de','es','ja','fr','it','ko','pt','ru'
 ]
@@ -21,6 +32,24 @@ const cors = require('cors')({
 const authModule = require('./auth');
 exports.authSignIn = functions.https.onRequest((req, res) => {
   authModule.handler(req, res, database);
+});
+
+exports.authSignInWithToken = functions.https.onRequest((req, res) => {
+  cors(req, res, () => {
+    const uid = req.query.uid;
+
+    if(!uid) {return}
+
+    admin.auth().getUser(uid)
+      .then(function(user) {
+        // See the UserRecord reference doc for the contents of userRecord.
+        res.status(200).send({user: user});
+      })
+      .catch(function(error) {
+        console.log("Error fetching user data:", error);
+      });
+  });
+
 });
 
 //strings functions

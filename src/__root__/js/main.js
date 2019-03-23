@@ -189,14 +189,6 @@
     if (event.origin !== window.location.origin) return;
     if (eventType !== 'remote-event' && eventType !== 'remote-command') return;
 
-    if (message.eventName === 'me:details') {
-      site.me.grabAndSetUserFromLocalTokens();
-    } else {
-      var method = eventType === 'remote-event' ? 'emit' : 'run';
-      var whichBus = eventType === 'remote-event' ? eventBus : commandBus;
-      var args = [message.eventName].concat(message.arguments);
-      whichBus[method].apply(whichBus, args);
-    }
   }
 
   function _sendEvent (messageType, target) {

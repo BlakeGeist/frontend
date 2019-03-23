@@ -24,12 +24,27 @@
     apiRoot = 'http://localhost:5001/web-proposals/us-central1/'
   }
 
+  //create collection/table for this site
+  site.api.register('auth:sign-in', signIn);
+  function signIn(params, success, error, complete) {
+    var apiCall = ('authSignIn').toString();
+    return this.api(httpMethod.get, apiCall, params, success, error, complete);
+  }
+
+  //site.api.register('auth:sign-in-with-token', signIn);
+  function signIn(params, success, error, complete) {
+    var apiCall = ('authSignInWithToken').toString();
+    return this.api(httpMethod.get, apiCall, params, success, error, complete);
+  }
+
+  //create collection/table for this site
   site.api.register('create:collection', createColleciton);
   function createColleciton(params, success, error, complete) {
     var apiCall = ('createSiteCollection').toString();
     return this.api(httpMethod.get, apiCall, params, success, error, complete);
   }
 
+  //create a string for all sites
   site.api.register('create:string', createString);
   function createString(params, success, error, complete) {
     var apiCall = ('createString').toString();

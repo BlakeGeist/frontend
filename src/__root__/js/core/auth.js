@@ -34,6 +34,7 @@
     C.define('auth:logout', function () {
       firebase.auth().signOut()
         .then(function() {
+          site.storage.remove('siteUser');          
           console.log('Signed Out');
           C.run('navigate:home');
         }, function(error) {
@@ -55,7 +56,18 @@
   function initializeEvents() {
     E.on('global:ready', initAuthForms);
     E.on('global:ready', initAuthButtonCommands);
+    E.on('api:complete:auth:sign-in', handlePostEmailLogin);
   }
+
+  function handlePostEmailLogin(xhr){
+    if(H.is2XX(xhr)) {
+      var user = xhr.responseJSON.user;
+      C.run('me:login', user);
+    } else {
+      console.log('failed to log user in');
+    }
+  }
+
 
   function initAuthButtonCommands(){
     $(document).on('click', '[data-auth="sign-out"]', function(event){
@@ -86,12 +98,12 @@
     $(document).on('submit', '[data-auth-form="sign-in"]', function(event){
       H.stopEvents(event);
       var formData = H.getFormData(this);
+      //C.run('api:auth:sign-in', formData);
+      //return;
       firebase.auth().signInWithEmailAndPassword(formData.email, formData.password)
         .then(function(result) {
           var user = result.user;
-          alert('the user is logged in');
-        })
-        .then(function(){
+          site.storage.set('siteUser', user);
           C.run('navigate:home');
         })
         .catch(function(error) {
