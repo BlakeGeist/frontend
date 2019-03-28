@@ -7,7 +7,7 @@
   function Me () {
 
 
-    var user = site.storage.get('siteUser');
+    var user = site.storage.get('uid');
 
     if(user) {
       $('html').removeClass('logged-out');

@@ -8,6 +8,7 @@ const staticJs = path.resolve(staticBase, 'js');
 const staticCss = path.resolve(staticBase, 'css');
 const staticImg = path.resolve(staticBase, 'img');
 const staticFonts = path.resolve(staticBase, 'fonts');
+const staticLess = path.resolve(staticBase, 'less');
 const fs = require('fs-promise');
 const bufferFrom = require('buffer-from');
 
@@ -18,6 +19,21 @@ const ezStatic = (app, webPath, fsPath) => app.use(mount(webPath, serve(fsPath, 
 function * cssAssets (next) {
   if (this.url.indexOf('/assets/css') !== 0) return yield next;
   const chunk = this.url.replace(/\?.*$/, '').replace(/^\/assets\/css\//, '');
+  const fullPath = path.resolve(staticCss, chunk);
+
+  try {
+    yield fs.stat(fullPath);
+  } catch (e) {
+    return yield next;
+  }
+
+  this.body = bufferFrom(squish.css(yield fs.readFile(fullPath, 'utf8')));
+  this.type = 'text/css';
+}
+
+function * lessAssets (next) {
+  if (this.url.indexOf('/assets/less') !== 0) return yield next;
+  const chunk = this.url.replace(/\?.*$/, '').replace(/^\/assets\/less\//, '');
   const fullPath = path.resolve(staticCss, chunk);
 
   try {
@@ -58,6 +74,7 @@ function setup (app) {
   }
   ezStatic(app, '/assets/img', staticImg);
   ezStatic(app, '/assets/fonts', staticFonts);
+  ezStatic(app, '/assets/less', staticLess);
 }
 
 module.exports = setup;

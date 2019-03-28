@@ -16,6 +16,7 @@
   var LANGUAGE = SETTINGS.language;
   var REGION = SETTINGS.region;
 
+
   preDomReady();
 
   function preDomReady () {
@@ -34,7 +35,7 @@
     C.define('auth:logout', function () {
       firebase.auth().signOut()
         .then(function() {
-          site.storage.remove('siteUser');          
+          site.storage.remove('siteUser');
           console.log('Signed Out');
           C.run('navigate:home');
         }, function(error) {
@@ -72,6 +73,8 @@
   function initAuthButtonCommands(){
     $(document).on('click', '[data-auth="sign-out"]', function(event){
       H.stopEvents(event);
+      setCookie('uid', '', -1)
+
       C.run('auth:logout');
     });
   }
@@ -97,22 +100,34 @@
 
     $(document).on('submit', '[data-auth-form="sign-in"]', function(event){
       H.stopEvents(event);
+
       var formData = H.getFormData(this);
       //C.run('api:auth:sign-in', formData);
       //return;
-      firebase.auth().signInWithEmailAndPassword(formData.email, formData.password)
-        .then(function(result) {
-          var user = result.user;
-          site.storage.set('siteUser', user);
-          C.run('navigate:home');
-        })
-        .catch(function(error) {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // ...
-        });
+      firebase.auth().signInWithEmailAndPassword(formData.email, formData.password).then(function(user) {
+        // Get the user's ID token as it is needed to exchange for a session cookie.
+
+      }).then(function() {
+        // A page redirect would suffice as the persistence is set to NONE.
+        return firebase.auth().signOut();
+      }).then(function() {
+        C.run('navigate:home');
+      });
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if(user){
+          setCookie('uid', user.uid, 7)
+        }
+      })
+
     });
+  }
+
+  function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
 
   function handlePostPasswordReset (xhr) {

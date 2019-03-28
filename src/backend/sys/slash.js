@@ -11,7 +11,6 @@ module.exports = function setup (app, router) {
       append += '?' + qs.stringify(this.query);
     }
 
-
     // handle the root / route -- redirect to /:region/:language/
     if (url === '/') {
 

@@ -19,10 +19,35 @@
     options: 'OPTIONS'
   };
 
+  function getCookie(cname) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+      }
+  }
+  return "";
+  }
+
+
   var apiRoot = 'https://us-central1-web-proposals.cloudfunctions.net/';
   if(window.location.hostname == 'localhost'){
     apiRoot = 'http://localhost:5001/web-proposals/us-central1/'
   }
+
+  //create collection/table for this site
+  site.api.register('sessionLogin', sessionLogin);
+  function sessionLogin(params, success, error, complete) {
+    var apiCall = ('sessionLogin').toString();
+    return this.api(httpMethod.get, apiCall, params, success, error, complete);
+  }
+
 
   //create collection/table for this site
   site.api.register('auth:sign-in', signIn);
@@ -32,7 +57,7 @@
   }
 
   //site.api.register('auth:sign-in-with-token', signIn);
-  function signIn(params, success, error, complete) {
+  function sdignIn(params, success, error, complete) {
     var apiCall = ('authSignInWithToken').toString();
     return this.api(httpMethod.get, apiCall, params, success, error, complete);
   }

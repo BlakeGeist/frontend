@@ -16,29 +16,40 @@
 
     <div class="menu-items">
 
-      <a
-        class="mod-logged-out"
-        href="/{{settings.region}}/{{settings.language}}/login/"
-        >
-        {{translate 'LOGIN'}}
-      </a>
+      {{#if fireUser.email}}
 
-      <span class="mod-logged-out">|</span>
+        <a
+          href=""
+          >
+          {{translate 'ADMIN'}}
+        </a>
 
-      <a
-        class="mod-logged-out"
-        href="/{{settings.region}}/{{settings.language}}/register/"
-        >
-        {{translate 'SIGN-UP'}}
-      </a>
+        <span>|</span>
 
-      <a
-        class="mod-logged-in"
-        data-auth="sign-out"
-        href=""
-        >
-        {{translate 'SIGN-OUT'}}
-      </a>
+        <a
+          data-auth="sign-out"
+          href="/{{settings.region}}/{{settings.language}}/admin/"
+          >
+          {{translate 'SIGN-OUT'}}
+        </a>
+
+      {{else}}
+
+        <a
+          href="/{{settings.region}}/{{settings.language}}/login/"
+          >
+          {{translate 'LOGIN'}}
+        </a>
+
+        <span>|</span>
+
+        <a
+          href="/{{settings.region}}/{{settings.language}}/register/"
+          >
+          {{translate 'SIGN-UP'}}
+        </a>
+
+      {{/if}}
 
     </div>
 

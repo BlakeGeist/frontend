@@ -47,10 +47,35 @@ var config = {
 
 firebase.initializeApp(config);
 
+
+
 async function getUser (varients, slug) {
+
+  var uid = this.cookies.get('uid');
+
+  var user = {};
+
+  if(uid) {
+    await admin.auth().getUser(uid)
+      .then(function(userRecord) {
+        // See the UserRecord reference doc for the contents of userRecord.
+        //console.log('Successfully fetched user data:', userRecord.toJSON());
+        _.extend(user, userRecord.toJSON());
+        console.log(user)
+      })
+      .catch(function(error) {
+        console.log('Error fetching user data:', error);
+      });
+  }
+
+  return user;
+
 }
 
 function * getPageData () {
+
+
+
   const pageData = {};
   const configFile = _.get(this.state, 'page.assets.config[0].fullPath');
   const config = configFile ? JSON.parse(yield fs.readFile(configFile, 'utf8')) : {};
@@ -83,8 +108,7 @@ function * getAsyncFireMeta () {
     fireStrings: yield getFireDataItem('strings'),
     fireProducts: yield getFireDataItem('products'),
     firePosts: yield getFireDataItem('posts'),
-    fireSiteSettings: yield fireSettings(),
-    fireUser: yield getUser()
+    fireSiteSettings: yield fireSettings()
   };
   return asyncMeta;
 }
@@ -161,6 +185,7 @@ function * getMeta () {
 function * getTemplateArguments (extend) {
   const _st = this.state;
   const fireMeta = yield getAsyncFireMeta.call(this);
+  const fireUser = yield getUser.call(this);
   const data = yield {
     pageData: this.getPageData(this),
     meta: this.getMeta(this),
@@ -191,7 +216,7 @@ function * getTemplateArguments (extend) {
     posts: fireMeta.firePosts,
     globalSiteSettings: fireMeta.fireGlobalSettings,
     siteSettings: fireMeta.fireSiteSettings,
-    fireUser: fireMeta.fireUser,
+    fireUser: fireUser,
     settings: {
       region: data.meta.region,
       language: data.meta.language,
@@ -256,6 +281,8 @@ function getContextTime (interval) {
 
 function setup (app) {
   app.use(function * (next) {
+
+
     //this.state.globalSiteSettings = yield getFireDataItem('globalSiteSettings'),
     //this.state.siteSettings = yield getSiteSettings();
     this.getMeta = getMeta;
