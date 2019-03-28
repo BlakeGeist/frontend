@@ -9,6 +9,20 @@ const firebase = require('firebase');
 const admin = require('firebase-admin');
 const db = admin.app().firestore();
 
+var config = {
+  apiKey: "AIzaSyDriZIhBxf7qF73SUOR-wDBHMceP5w7Rss",
+  authDomain: "web-proposals.firebaseapp.com",
+  databaseURL: "https://web-proposals.firebaseio.com",
+  projectId: "web-proposals",
+  storageBucket: "web-proposals.appspot.com",
+  messagingSenderId: "907512529926"
+};
+
+if(!firebase.apps.lenth){
+  firebase.initializeApp(config);
+}
+
+
 async function getFireDataItem(callTarget){
   const fireData = {};
   await db.collection(callTarget)
@@ -36,16 +50,6 @@ var fireSettings = async function getSiteSettings (varients, slug) {
   return fireData;
 }
 
-var config = {
-  apiKey: "AIzaSyDriZIhBxf7qF73SUOR-wDBHMceP5w7Rss",
-  authDomain: "web-proposals.firebaseapp.com",
-  databaseURL: "https://web-proposals.firebaseio.com",
-  projectId: "web-proposals",
-  storageBucket: "web-proposals.appspot.com",
-  messagingSenderId: "907512529926"
-};
-
-firebase.initializeApp(config);
 
 
 

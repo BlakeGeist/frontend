@@ -3,8 +3,39 @@
 const _ = require('lodash');
 const path = require('path');
 const urlLib = require('url');
-const utils = require('ominto-utils');
+//const utils = require('ominto-utils');
 const querystring = require('querystring');
+
+function mergeWhitelabelInfo(cfg, defaults) {
+  return _.extend({}, defaults, cfg, function(cur, val) {
+    if (_.isString(val)) return val;
+    if (_.isArray(val)) return val;
+    if (_.isObject(val)) return _.extend({}, cur, val);
+    return val;
+  });
+}
+
+function whitelabelInfoByDomain(configs, domain) {
+  const W = configs.whitelabel;
+  const list = Object.keys(W).filter(x => x !== 'defaults');
+  for (let i = 0; i < list.length; i++) {
+    const entry = W[list[i]];
+    const alts = entry['domain-alts'] || [];
+    if (entry.domain === domain || alts.indexOf(domain) > -1) {
+      return mergeWhitelabelInfo(entry, W.defaults);
+    }
+  }
+
+  return null;
+}
+
+function whitelabelInfoByName(configs, name) {
+  const W = configs.whitelabel;
+  if (W[name]) return mergeWhitelabelInfo(W[name], W.defaults);
+
+  return null;
+}
+
 
 const PATHS = {};
 PATHS.package = path.resolve(__dirname, '../../..');
@@ -36,7 +67,7 @@ function * middleware (next) {
   _st.isDev = !!(/^dev/.test(_st.env));
   _st.isProd = !_st.isDev;
 
-  let info = utils.whitelabelInfoByName(configs, 'black');
+  let info = whitelabelInfoByName(configs, 'black');
   if (!info) throw new Error('NO WHITELABEL FOUND AND OMINTO DOESNT EVEN EXIST?');
 
   _st.whitelabel = info.slug;
