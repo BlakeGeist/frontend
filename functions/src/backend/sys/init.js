@@ -36,7 +36,6 @@ function whitelabelInfoByName(configs, name) {
   return null;
 }
 
-
 const PATHS = {};
 PATHS.package = path.resolve(__dirname, '../../..');
 PATHS.src = path.resolve(PATHS.package, 'src');
@@ -119,6 +118,8 @@ function * middleware (next) {
 
   _st.pageData = {}; // any middleware can add to this
   _st.siteSettings = {name: 'cat'}; // any middleware can add to this
+
+  console.log(_st);
 
   yield next;
 }

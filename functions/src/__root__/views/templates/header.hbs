@@ -19,7 +19,7 @@
       {{#if fireUser.email}}
 
         <a
-          href=""
+          href="/{{settings.region}}/{{settings.language}}/admin/"
           >
           {{translate 'ADMIN'}}
         </a>
@@ -28,7 +28,7 @@
 
         <a
           data-auth="sign-out"
-          href="/{{settings.region}}/{{settings.language}}/admin/"
+          href=""          
           >
           {{translate 'SIGN-OUT'}}
         </a>

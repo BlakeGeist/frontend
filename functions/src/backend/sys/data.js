@@ -66,78 +66,7 @@ function getData () {
   const getKey = key => resp => _.get(resp, 'body.' + key);
   const _DATA = {};
   _DATA._fetchers = {
-    proposals: async function () {
-      const fireData = {};
-      await db.collection('proposals')
-        .get()
-        .then(query=>{
-            let data = query.docs.map(doc=>{
-                let x = doc.data()
-                    x['_id']=doc.id;
-                    return x;
-            })
-            _.extend(fireData, data);
-        })
-      return fireData;
-    },
-    proposalBySlug: async function (varients, slug) {
-      const fireData = {};
-      await db.collection('proposals').doc(slug)
-        .get()
-        .then(doc=>{
-          let data = doc.data();
-          _.extend(fireData, data);
-        })
-      return fireData;
-    },
-    strings: async function () {
-      const fireData = {};
-      await db.collection('strings')
-        .get()
-        .then(query=>{
-            let data = query.docs.map(doc=>{
-                let x = doc.data()
-                    x['_id']=doc.id;
-                    return x;
-            })
-            _.extend(fireData, data);
-        })
-      return fireData;
-    },
-    products: async function () {
-      const fireData = {};
-      await db.collection('products')
-        .get()
-        .then(query=>{
-            let data = query.docs.map(doc=>{
-                let x = doc.data()
-                    x['_id']=doc.id;
-                    return x;
-            })
-            _.extend(fireData, data);
-        })
-      return fireData;
-    },
-    productBySlug: async function (varients, slug) {
-      const fireData = {};
-      await db.collection('products').doc(slug)
-        .get()
-        .then(doc=>{
-          let data = doc.data();
-          _.extend(fireData, data);
-        })
-      return fireData;
-    },
-    siteSettings: async function (varients, slug) {
-      const fireData = {};
-      await db.collection('sites').doc('localhost')
-        .get()
-        .then(doc=>{
-          let data = doc.data();
-          _.extend(fireData, data);
-        })
-      return fireData;
-    }
+
   };
 
   _DATA.get = co.wrap(function * (type) {
