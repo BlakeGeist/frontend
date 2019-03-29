@@ -24,14 +24,14 @@ function component (name) {
   .component('sys/render')       // adds this.renderTemplate()
   .component('sys/errors')       // error handling routes
   .component('sys/page-info')    // adds asset and page config data to this.state
-  .component('sys/data')         // sets up this.fetch() as an interface to api
+  //.component('sys/data')         // sets up this.fetch() as an interface to api
   .component('sys/page-data')    // fetches data from api for content/dynamic pages
   .component('sys/etag')         // handles etags for everything other than page.js and page template renders
   .component('sys/assets')       // everything in the root /assets folder. this comes first because speed.
   .component('sys/slash')        // redirect page to page/
   .component('sys/main-css')     // compiles main.less to main.css
   .component('sys/handlebars')   // sets up handlebars for node and browser
-  .component('sys/healthcheck')  // health-check script
+  //.component('sys/healthcheck')  // health-check script
   .component('sys/scripts')      // renders <script> tags into dom
   .component('dynamic/routes')   // routes for specific dynamic pages
   .component('pages/css')        // css for both content and dynamic pages
@@ -56,24 +56,6 @@ var languages = [
 const cors = require('cors')({
   origin: true
 });
-
-exports.authSignInWithToken = functions.https.onRequest((req, res) => {
-  cors(req, res, () => {
-    console.log('inside authSignInWithToken')
-
-    admin.auth().verifyIdToken("eyJhbGciOiJSUzI1NiIsImtpZCI6InNrSUJOZyJ9.eyJpc3MiOiJodHRwczovL3Nlc3Npb24uZmlyZWJhc2UuZ29vZ2xlLmNvbS93ZWItcHJvcG9zYWxzIiwiYXVkIjoid2ViLXByb3Bvc2FscyIsImF1dGhfdGltZSI6MTU1MzU4OTA1NiwidXNlcl9pZCI6Imx6OVlpckhBWTlUYVBtVUpKUkx5Mmh1ZUE4RDIiLCJzdWIiOiJsejlZaXJIQVk5VGFQbVVKSlJMeTJodWVBOEQyIiwiaWF0IjoxNTUzNTg5MDU3LCJleHAiOjE1NTQwMjEwNTcsImVtYWlsIjoiYmxha2VnZWlzdEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiYmxha2VnZWlzdEBnbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.g0vSP3LDTcFO4pJoRE5WI-gFbNqdQHUdUkkCO8ZS1oPIxF4bffL4_tCGd1iC5bZZYGDmrpWIfaAjvWMGKyCiQKiZCEQSVujyepUul9yn6YoeCpFlwowCqZvM1Z0FSxM5RX3rqKBzE-5nfS3qEFR1fneQS9jtI7HC9Wi5QIMlHPfTQJJnzw3K8K566DWr8UkgWtTLouoCNQUaTst-fuOVYdBmCUh7oyI6oSzQrfI-x7H7Jv4RBc_n-IInFyLN4hYeMRpZ0n8K_pp-JwgY1nBrNYDFiZEHn-XaUO2nCdXtJ-7Qq_Cqo4oPBJczm0G4lquTvSM5fa1p4o8WmhvZKwBffg")
-      .then(function(decodedToken) {
-        return admin.auth().createSessionCookie(idToken, {expiresIn})
-        // ...
-      }).catch(function(error) {
-        console.log(error)
-        // Handle error
-      });
-
-  });
-
-});
-
 
 //strings functions
 const stringsModule = require('./strings');

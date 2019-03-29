@@ -16,8 +16,6 @@ productDetailsPage.middleware = function * (next) {
   const path = _.get(this.state, 'page.path');
   if (!path || path.indexOf('product/') !== 0) return yield next;
   const slug = this.state.relativeUrl.replace('product/', '').replace(/\/.*$/, '');
-  //this.state.pageData.product = yield this.fetch('productBySlug', this.state.variant, slug);
-  //console.log(yield this.fetch('productBySlug', this.state.variant, slug));
   yield next;
 };
 

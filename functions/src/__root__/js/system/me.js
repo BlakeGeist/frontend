@@ -6,14 +6,6 @@
 
   function Me () {
 
-
-    var user = site.storage.get('uid');
-
-    if(user) {
-      $('html').removeClass('logged-out');
-      $('html').addClass('logged-in');
-    }
-
     this._user = null;
     this.loggedIn = false;
     this._tokens = initTokens();

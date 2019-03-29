@@ -15,8 +15,6 @@ proposalDetailsPage.middleware = function * (next) {
   const path = _.get(this.state, 'page.path');
   if (!path || path.indexOf('proposal/') !== 0) return yield next;
   const slug = this.state.relativeUrl.replace('proposal/', '').replace(/\/.*$/, '');
-  this.state.pageData.proposal = yield this.fetch('proposalBySlug', this.state.variant, slug);
-  //console.log(yield this.fetch('proposalBySlug', this.state.variant, slug));
   yield next;
 };
 

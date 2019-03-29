@@ -73,7 +73,7 @@
   function initAuthButtonCommands(){
     $(document).on('click', '[data-auth="sign-out"]', function(event){
       H.stopEvents(event);
-      setCookie('uid', '', -1)
+      setCookie('__session=uid', '', -1)
 
       C.run('auth:logout');
     });
@@ -111,12 +111,12 @@
         // A page redirect would suffice as the persistence is set to NONE.
         return firebase.auth().signOut();
       }).then(function() {
-        C.run('navigate:home');
       });
 
       firebase.auth().onAuthStateChanged(function(user) {
         if(user){
-          setCookie('uid', user.uid, 7)
+          setCookie('__session=uid', user.uid, 7)
+          C.run('navigate:home');
         }
       })
 

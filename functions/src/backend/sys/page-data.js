@@ -7,7 +7,6 @@ const logAndDefault = (desc, def, ctx) => error => { return def; };
 
 const firebase = require('firebase');
 const admin = require('firebase-admin');
-const db = admin.app().firestore();
 
 var config = {
   apiKey: "AIzaSyDriZIhBxf7qF73SUOR-wDBHMceP5w7Rss",
@@ -22,6 +21,17 @@ if(!firebase.apps.lenth){
   firebase.initializeApp(config);
 }
 
+if (!admin.apps.length) {
+  var serviceAccount = require('../../../web-proposals-firebase-adminsdk-w49db-6d89175cd2.json');
+
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://web-proposals.firebaseio.com"
+  });
+
+}
+
+const db = admin.app().firestore();
 
 async function getFireDataItem(callTarget){
   const fireData = {};
@@ -50,15 +60,13 @@ var fireSettings = async function getSiteSettings (varients, slug) {
   return fireData;
 }
 
-
-
-
 async function getUser (varients, slug) {
-
-  var uid = this.cookies.get('uid');
-
+  console.log(this)
+  console.log(this.cookies);
+  var uid = this.cookies.get('__session=uid');
+  console.log('blake-find-this');
+  console.log(uid);
   var user = {};
-
   if(uid) {
     await admin.auth().getUser(uid)
       .then(function(userRecord) {
@@ -71,38 +79,7 @@ async function getUser (varients, slug) {
         console.log('Error fetching user data:', error);
       });
   }
-
   return user;
-
-}
-
-function * getPageData () {
-
-
-
-  const pageData = {};
-  const configFile = _.get(this.state, 'page.assets.config[0].fullPath');
-  const config = configFile ? JSON.parse(yield fs.readFile(configFile, 'utf8')) : {};
-  const promises = {};
-  for (let k in config) {
-    if (config[k].remote) {
-      promises[k] = this.fetch(k, this.state.variant);
-    } else {
-      promises[k] = Promise.resolve(config[k]);
-    }
-  }
-  try {
-    _.extend(pageData, yield promises);
-  } catch (e) {}
-  _.extend(pageData, this.state.pageData);
-  return pageData;
-}
-
-function * getAsyncMeta () {
-  const asyncMeta = yield {
-    pageData: getPageData.call(this)
-  };
-  return asyncMeta;
 }
 
 function * getAsyncFireMeta () {
@@ -133,7 +110,7 @@ function * getAsyncFireMeta () {
 };
 
 function * getMeta () {
-  const aMeta = yield getAsyncMeta.call(this);
+  const aMeta = {};
   const _st = this.state;
   const _wl = _st.whitelabelInfo;
   const meta = _.extend(
@@ -191,26 +168,14 @@ function * getTemplateArguments (extend) {
   const fireMeta = yield getAsyncFireMeta.call(this);
   const fireUser = yield getUser.call(this);
   const data = yield {
-    pageData: this.getPageData(this),
     meta: this.getMeta(this),
     fireBaseData: fireMeta.fireData,
     siteSettings: fireMeta.fireSiteSettings
   };
 
 
-  //override current date to test carousel in advance
-  if(this.query && this.query.carouselDate)
-    data.pageData.carouselDate = this.query.carouselDate;
-
-  if(this.query && this.query.landingPageView)
-    this.query.landingPageView = this.query.landingPageView.replace('.', '-');
-    data.pageData.isLp = this.query.landingPageView;
-
-  _.extend(data.pageData, extend || {});
-
   const tplArgs = {
     proposals: data.meta.proposals,
-    data: data.pageData,
     whitelabel: {
       name: data.meta.whitelabelText // had to add this now that whitelabel.name is happening via reprocess
     },
@@ -285,13 +250,7 @@ function getContextTime (interval) {
 
 function setup (app) {
   app.use(function * (next) {
-
-
-    //this.state.globalSiteSettings = yield getFireDataItem('globalSiteSettings'),
-    //this.state.siteSettings = yield getSiteSettings();
     this.getMeta = getMeta;
-    this.getAsyncMeta = getAsyncMeta;
-    this.getPageData = getPageData;
     this.getTemplateArguments = getTemplateArguments;
     yield next;
   });

@@ -1,836 +1,147 @@
-[debug] [2019-03-28T07:42:59.812Z] ----------------------------------------------------------------------
-[debug] [2019-03-28T07:42:59.820Z] Command:       /Users/BGeist/.nvm/versions/node/v10.13.0/bin/node /Users/BGeist/.nvm/versions/node/v10.13.0/bin/firebase serve
-[debug] [2019-03-28T07:42:59.821Z] CLI Version:   6.1.2
-[debug] [2019-03-28T07:42:59.821Z] Platform:      darwin
-[debug] [2019-03-28T07:42:59.821Z] Node Version:  v10.13.0
-[debug] [2019-03-28T07:42:59.822Z] Time:          Thu Mar 28 2019 00:42:59 GMT-0700 (Pacific Daylight Time)
-[debug] [2019-03-28T07:42:59.822Z] ----------------------------------------------------------------------
+[debug] [2019-03-29T04:36:29.960Z] ----------------------------------------------------------------------
+[debug] [2019-03-29T04:36:29.963Z] Command:       /Users/BGeist/.nvm/versions/node/v10.13.0/bin/node /Users/BGeist/.nvm/versions/node/v10.13.0/bin/firebase deploy
+[debug] [2019-03-29T04:36:29.963Z] CLI Version:   6.1.2
+[debug] [2019-03-29T04:36:29.963Z] Platform:      darwin
+[debug] [2019-03-29T04:36:29.963Z] Node Version:  v10.13.0
+[debug] [2019-03-29T04:36:29.964Z] Time:          Thu Mar 28 2019 21:36:29 GMT-0700 (Pacific Daylight Time)
+[debug] [2019-03-29T04:36:29.964Z] ----------------------------------------------------------------------
 [debug] 
-[debug] [2019-03-28T07:42:59.835Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] [2019-03-28T07:42:59.836Z] > authorizing via signed-in user
-[debug] [2019-03-28T07:42:59.836Z] [iam] checking project web-proposals for permissions ["firebase.projects.get"]
-[debug] [2019-03-28T07:42:59.839Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/web-proposals:testIamPermissions  
+[debug] [2019-03-29T04:36:29.979Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-03-29T04:36:29.979Z] > authorizing via signed-in user
+[debug] [2019-03-29T04:36:29.979Z] [iam] checking project web-proposals for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2019-03-29T04:36:29.981Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/web-proposals:testIamPermissions  
 
-[debug] [2019-03-28T07:43:00.347Z] <<< HTTP RESPONSE 200
-[debug] [2019-03-28T07:43:00.350Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/web-proposals  
+[debug] [2019-03-29T04:36:30.307Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-29T04:36:30.309Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/web-proposals  
  
-[debug] [2019-03-28T07:43:00.589Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-29T04:36:30.551Z] <<< HTTP RESPONSE 200
 [info] 
-[info] === Serving from '/Users/BGeist/Documents/blakes-apps/frontend'...
+[info] === Deploying to 'web-proposals'...
 [info] 
-[info] i  functions: Preparing to emulate functions.
-[debug] [2019-03-28T07:43:01.643Z] Fetching environment
-[debug] [2019-03-28T07:43:01.645Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/907512529926:getServerAppConfig  
+[info] i  deploying database, storage, firestore, functions, hosting
+[info] ✔  functions: Finished running predeploy script.
+[info] i  database: checking rules syntax...
+[debug] [2019-03-29T04:36:34.500Z] >>> HTTP REQUEST PUT https://web-proposals.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+  "rules": {
+    ".read": false,
+    ".write": false
+  }
+}
+[debug] [2019-03-29T04:36:34.827Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules syntax for database web-proposals is valid
+[debug] [2019-03-29T04:36:34.829Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/web-proposals  
  
-[debug] [2019-03-28T07:43:01.646Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/907512529926/clients/_:getWebAppConfig  
+[debug] [2019-03-29T04:36:35.336Z] <<< HTTP RESPONSE 200
+[info] i  storage: checking storage.rules for compilation errors...
+[debug] [2019-03-29T04:36:35.348Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/web-proposals:test  
+
+[debug] [2019-03-29T04:36:35.818Z] <<< HTTP RESPONSE 200
+[info] ✔  storage: rules file storage.rules compiled successfully
+[info] i  firestore: checking firestore.rules for compilation errors...
+[debug] [2019-03-29T04:36:35.821Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/web-proposals:test  
+
+[debug] [2019-03-29T04:36:36.219Z] <<< HTTP RESPONSE 200
+[info] ✔  firestore: rules file firestore.rules compiled successfully
+[debug] [2019-03-29T04:36:36.222Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "@koa/cors": "^2.2.3",
+    "aws-sdk": "^2.423.0",
+    "buffer-from": "^1.1.1",
+    "cheerio": "^0.22.0",
+    "co": "^4.5.4",
+    "co-body": "^4.0.0",
+    "co-wait": "0.0.0",
+    "co-waiter": "^1.0.2",
+    "cors": "^2.8.5",
+    "cssmin": "^0.4.3",
+    "debug": "^2.2.0",
+    "denodeify": "^1.2.1",
+    "dotenv": "^2.0.0",
+    "firebase": "^5.9.0",
+    "firebase-admin": "~6.0.0",
+    "firebase-functions": "^2.1.0",
+    "fs-promise": "^0.3.1",
+    "handlebars": "^3.0.6",
+    "i": "^0.3.3",
+    "json-stable-stringify": "^1.0.0",
+    "koa": "^2.7.0",
+    "koa-cookie": "^1.0.0",
+    "koa-mount": "^4.0.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "less": "^2.5.1",
+    "lodash": "^3.9.3",
+    "mime-types": "^2.1.22",
+    "mkdirp": "^0.5.1",
+    "mkdirp-promise": "^1.0.3",
+    "moment": "^2.24.0",
+    "pdf-maker": "0.0.2",
+    "query-string": "4.2.0",
+    "recursive-readdir": "^1.2.1",
+    "recursive-readdir-sync": "^1.0.6",
+    "redis": "^2.3.1",
+    "request": "2.80.0",
+    "request-promise": "^0.4.3",
+    "swag": "^0.7.0",
+    "uglify-js": "^2.6.1"
+  },
+  "devDependencies": {
+    "chalk": "^1.1.1",
+    "gulp-develop-server": "^0.5.0",
+    "gulp-livereload": "^3.8.0",
+    "gulp-shell": "^0.5.1",
+    "nodemon": "^1.18.10",
+    "eslint": "^4.12.0",
+    "eslint-plugin-promise": "^3.6.0"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2019-03-29T04:36:36.223Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/web-proposals?view=CONSUMER_VIEW  
  
-[debug] [2019-03-28T07:43:01.855Z] <<< HTTP RESPONSE 200
-[debug] [2019-03-28T07:43:01.855Z] Starting @google-cloud/functions-emulator
-[debug] [2019-03-28T07:43:01.894Z] <<< HTTP RESPONSE 200
-[info] i  hosting: Serving hosting files from: public
-[info] ✔  hosting: Local server: http://localhost:5000
-[debug] [2019-03-28T07:43:03.420Z] Parsing function triggers
-[info] [hosting] Rewriting /us/en/ to local function api
-[info] [hosting] Rewriting /us/en/assets/page.css?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553758200000 to local function api
-[info] [hosting] Rewriting /us/en/assets/page-context.js?t=1553758200000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /us/en/assets/page.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /us/en/assets/page-context.js?t=1553758200000 to local function api
-[info] ✔  functions: api: http://localhost:5001/web-proposals/us-central1/api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] ✔  functions: authSignInWithToken: http://localhost:5001/web-proposals/us-central1/authSignInWithToken
-[info] ✔  functions: createSiteCollection: http://localhost:5001/web-proposals/us-central1/createSiteCollection
-[info] ✔  functions: createString: http://localhost:5001/web-proposals/us-central1/createString
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553758985680 to local function api
-[info] [hosting] Rewriting /us/en/admin/ to local function api
-[info] [hosting] Rewriting /us/en/admin/assets/page.css?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553758200000 to local function api
-[info] [hosting] Rewriting /us/en/admin/assets/page-context.js?t=1553758200000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /us/en/admin/assets/page.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /us/en/ to local function api
-[info] [hosting] Rewriting /us/en/assets/page.css?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553758200000 to local function api
-[info] [hosting] Rewriting /us/en/assets/page-context.js?t=1553758200000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /us/en/assets/page.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553758996751 to local function api
-[info] [hosting] Rewriting / to local function api
-[info] [hosting] Rewriting /us/da/ to local function api
-[info] [hosting] Rewriting /us/da/assets/page.css?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /us/da/context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /us/da/assets/page-context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /us/da/assets/page.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /us/en/ to local function api
-[info] [hosting] Rewriting /us/en/assets/page.css?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /us/en/assets/page-context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /us/en/assets/page.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /us/en/login/ to local function api
-[info] [hosting] Rewriting /us/en/login/assets/page.css?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /us/en/login/assets/page-context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /us/en/login/assets/page.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /us/en/ to local function api
-[info] [hosting] Rewriting /us/en/assets/page.css?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /us/en/assets/page-context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /us/en/assets/page.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /us/en/ to local function api
-[info] [hosting] Rewriting /us/en/assets/page.css?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /us/en/assets/page-context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /us/en/assets/page.js?t=1553796770957 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /us/en/ to local function api
-[info] [hosting] Rewriting /us/en/assets/page.css?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /us/en/assets/page-context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /us/en/assets/page.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /us/en/admin/ to local function api
-[info] [hosting] Rewriting /us/en/admin/assets/page.css?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /us/en/admin/assets/page-context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /us/en/admin/assets/page.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /us/en/ to local function api
-[info] [hosting] Rewriting /us/en/assets/page.css?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /us/en/assets/page-context.js?t=1553796000000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /us/en/assets/page.js?t=1553796889523 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /us/en/ to local function api
-[info] [hosting] Rewriting /us/en/assets/page.css?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553814000000 to local function api
-[info] [hosting] Rewriting /us/en/assets/page-context.js?t=1553814000000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /us/en/assets/page.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /us/en/login/ to local function api
-[info] [hosting] Rewriting /us/en/login/assets/page.css?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /us/en/login/assets/page-context.js?t=1553814000000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553814000000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /us/en/login/assets/page.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /us/en/ to local function api
-[info] [hosting] Rewriting /us/en/assets/page.css?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553814000000 to local function api
-[info] [hosting] Rewriting /us/en/assets/page-context.js?t=1553814000000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /us/en/assets/page.js?t=1553814279822 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting / to local function api
-[info] [hosting] Rewriting /us/en/ to local function api
-[info] [hosting] Rewriting /us/en/assets/page.css?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553826600000 to local function api
-[info] [hosting] Rewriting /us/en/assets/page-context.js?t=1553826600000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /us/en/assets/page.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /us/en/login/ to local function api
-[info] [hosting] Rewriting /us/en/login/assets/page.css?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553826600000 to local function api
-[info] [hosting] Rewriting /us/en/login/assets/page-context.js?t=1553826600000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /us/en/login/assets/page.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /us/en/ to local function api
-[info] [hosting] Rewriting /us/en/assets/page.css?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553826600000 to local function api
-[info] [hosting] Rewriting /us/en/assets/page-context.js?t=1553826600000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /us/en/assets/page.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /us/en/ to local function api
-[info] [hosting] Rewriting /us/en/assets/page.css?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/pre-init.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /us/en/context.js?t=1553826600000 to local function api
-[info] [hosting] Rewriting /us/en/assets/page-context.js?t=1553826600000 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-3.3.1.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.mobile.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery-ui.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jquery.lazy.min.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/lodash.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/eventemitter2.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/basil.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/jwt-decode.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/handlebars.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/swag.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/vendor/moment.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/main.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/dev.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/api.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/helpers.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/ui-preferences.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/nav.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/modal.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/me.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/system/firebase.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/handlebars-support.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-ui.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/core/standard-modals.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/js/core/auth.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /us/en/assets/page.js?t=1553826839896 to local function api
-[info] [hosting] Rewriting /assets/less/main.less to local function api
-[info] [hosting] Rewriting /assets/less/context.less to local function api
-[info] [hosting] Rewriting /assets/less/core.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/font-face.less to local function api
-[info] [hosting] Rewriting /assets/less/components/header.less to local function api
-[info] [hosting] Rewriting /assets/less/components/footer.less to local function api
-[info] [hosting] Rewriting /assets/less/partials/modal.less to local function api
-[info] [hosting] Rewriting /assets/less/variables.less to local function api
-[info] [hosting] Rewriting /assets/less/colors.less to local function api
-[info] [hosting] Rewriting /assets/less/helpers/mixins.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/styles.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/fonts.less to local function api
-[info] [hosting] Rewriting /assets/less/templates/type/language.less to local function api
-[info] [hosting] Rewriting /assets/less/whitelabel/black/colors.less to local function api
+[debug] [2019-03-29T04:36:36.223Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/web-proposals?view=CONSUMER_VIEW  
+ 
+[debug] [2019-03-29T04:36:37.151Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-29T04:36:37.209Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2019-03-29T04:36:37.210Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/web-proposals  
+ 
+[debug] [2019-03-29T04:36:37.625Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-29T04:36:37.626Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/907512529926:getServerAppConfig  
+ 
+[debug] [2019-03-29T04:36:37.830Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-29T04:36:37.832Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/web-proposals/versions  
+
+[debug] [2019-03-29T04:36:38.661Z] <<< HTTP RESPONSE 200
+[info] i  storage: uploading rules storage.rules...
+[debug] [2019-03-29T04:36:38.662Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/web-proposals/rulesets  
+
+[debug] [2019-03-29T04:36:39.428Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-29T04:36:39.428Z] [rules] created ruleset projects/web-proposals/rulesets/b69e8e4f-a022-4433-8ae1-f026c32278dd
+[info] i  firestore: uploading rules firestore.rules...
+[debug] [2019-03-29T04:36:39.430Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/web-proposals/rulesets  
+
+[debug] [2019-03-29T04:36:39.430Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1beta1/projects/web-proposals/databases/(default)/indexes  
+ 
+[debug] [2019-03-29T04:36:39.907Z] <<< HTTP RESPONSE 200
+[debug] [2019-03-29T04:36:39.907Z] [rules] created ruleset projects/web-proposals/rulesets/c08544ee-9454-4981-b476-6e26c3c34823
+[debug] [2019-03-29T04:36:39.909Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2019-03-29T04:36:39.916Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/web-proposals/configs  
+ 
+[debug] [2019-03-29T04:36:40.135Z] <<< HTTP RESPONSE 200
