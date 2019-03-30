@@ -35,7 +35,9 @@
     C.define('auth:logout', function () {
       firebase.auth().signOut()
         .then(function() {
-          site.storage.remove('siteUser');
+          site.storage.remove('__session=uid');
+          setCookie('__session=uid', '', -1)
+
           console.log('Signed Out');
           C.run('navigate:home');
         }, function(error) {
@@ -100,7 +102,6 @@
 
     $(document).on('submit', '[data-auth-form="sign-in"]', function(event){
       H.stopEvents(event);
-
       var formData = H.getFormData(this);
       //C.run('api:auth:sign-in', formData);
       //return;

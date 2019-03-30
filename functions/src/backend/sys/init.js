@@ -54,8 +54,6 @@ function * middleware (next) {
   _st.hostname = hostname;
 
   _st.hostname = _st.hostname.replace(/\./g, '-');
-  _st.hostname = _st.hostname.replace('test-', '');
-  _st.hostname = _st.hostname.replace('preprod-', '');
 
   let qs;
   if (_st.url.query) {
@@ -117,9 +115,7 @@ function * middleware (next) {
   }
 
   _st.pageData = {}; // any middleware can add to this
-  _st.siteSettings = {name: 'cat'}; // any middleware can add to this
-
-  console.log(_st);
+  _st.siteSettings = {}; // any middleware can add to this
 
   yield next;
 }

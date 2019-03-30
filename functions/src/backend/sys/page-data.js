@@ -61,11 +61,7 @@ var fireSettings = async function getSiteSettings (varients, slug) {
 }
 
 async function getUser (varients, slug) {
-  console.log(this)
-  console.log(this.cookies);
   var uid = this.cookies.get('__session=uid');
-  console.log('blake-find-this');
-  console.log(uid);
   var user = {};
   if(uid) {
     await admin.auth().getUser(uid)
@@ -73,7 +69,6 @@ async function getUser (varients, slug) {
         // See the UserRecord reference doc for the contents of userRecord.
         //console.log('Successfully fetched user data:', userRecord.toJSON());
         _.extend(user, userRecord.toJSON());
-        console.log(user)
       })
       .catch(function(error) {
         console.log('Error fetching user data:', error);
@@ -249,6 +244,8 @@ function getContextTime (interval) {
 }
 
 function setup (app) {
+  console.log(getTemplateArguments);
+  console.log('ffffind')
   app.use(function * (next) {
     this.getMeta = getMeta;
     this.getTemplateArguments = getTemplateArguments;

@@ -28,7 +28,10 @@ const partialsPost = [
   '})(window, window.site, window.Handlebars);'
 ];
 
+console.log('im inside the hbs file')
+
 function * renderHelpers () {
+  console.log(helpersRoot);
   const paths = yield recursiveRead(helpersRoot);
   const out = [];
   for (let i = 0; i < paths.length; i++) {
@@ -53,6 +56,7 @@ function * renderPartials () {
         return '"' + key + '": template(' + Handlebars.precompile(data) + ')';
       });
   }));
+
 
   return [].concat(partialsPre, [chunks.join(',\n    ')], partialsPost).join('\n');
 }

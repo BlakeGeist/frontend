@@ -13,13 +13,18 @@ function * partials () {
   this.type = 'application/javascript';
 }
 
-function * all () {
-  const parts = yield handlebarsSupport.renderAll();
-  this.body = parts.helpers + parts.partials;
-  this.type = 'application/javascript';
+async function all (ctx) {
+
+  const parts = await handlebarsSupport.renderAll();
+
+  ctx.body = parts.helpers + parts.partials;
+
+  ctx.type = 'application/javascript';
+
 }
 
 function setup (app, router) {
+  console.log('insidehbsSetUp')
   router.get('/assets/js/handlebars-partials.js', partials);
   router.get('/assets/js/handlebars-helpers.js', helpers);
   router.get('/assets/js/handlebars-support.js', all);

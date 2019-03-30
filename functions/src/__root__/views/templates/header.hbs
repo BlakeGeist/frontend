@@ -28,26 +28,71 @@
 
         <a
           data-auth="sign-out"
-          href=""          
+          href=""
           >
           {{translate 'SIGN-OUT'}}
         </a>
 
       {{else}}
 
-        <a
-          href="/{{settings.region}}/{{settings.language}}/login/"
-          >
-          {{translate 'LOGIN'}}
-        </a>
+      <span>
+
+          <a
+            data-toggle-expander
+            href=""
+            >
+
+            {{translate 'LOGIN'}}
+
+          </a>
+
+          <div class="is-expanded mod-sign-in">
+
+            <div class="is-expanded-content">
+
+              <div>{{translate 'LOGIN'}}</div>
+
+              {{>
+                partials/forms/email-pass
+                mod="sign-in"
+              }}
+
+            </div>
+
+          </div>
+
+        </span>
 
         <span>|</span>
 
-        <a
-          href="/{{settings.region}}/{{settings.language}}/register/"
-          >
-          {{translate 'SIGN-UP'}}
-        </a>
+        <span>
+
+          <a
+          data-toggle-expander
+
+            href="/{{settings.region}}/{{settings.language}}/register/"
+            >
+
+            {{translate 'SIGN-UP'}}
+
+          </a>
+
+          <div class="is-expanded mod-sign-in">
+
+            <div class="is-expanded-content">
+
+              <div>{{translate 'SIGN-UP'}}</div>
+
+              {{>
+                partials/forms/email-pass
+                mod="sign-ip"
+              }}
+
+            </div>
+
+          </div>
+
+        </span>
 
       {{/if}}
 

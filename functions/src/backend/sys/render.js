@@ -41,7 +41,6 @@ function * renderTemplate (tplPath, tplArgs, options) {
   }
   const data = tplCache[chosenPath](tplArgs);
 
-
   return data;
 }
 

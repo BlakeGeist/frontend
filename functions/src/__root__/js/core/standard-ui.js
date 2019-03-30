@@ -36,6 +36,7 @@
   }
 
   function ready() {
+
     $(document).on('change', '[data-select-target="language"]', function(event){
       var targetLanguage = $(this).find(":selected").val();
       C.run('navigate:language', targetLanguage);
@@ -70,6 +71,22 @@
       C.run('modal:close');
     });
   }
+
+
+
+  $(document).on('click', '[data-toggle-expander]', function(e){
+    H.stopEvents(e);
+    $('.is-open').removeClass('is-open');    
+    $(this).parent().addClass('is-open');
+  })
+
+  $(document).on('click', 'html', function(e){
+    $('.is-open').removeClass('is-open');
+  })
+
+  $(document).on('click', '.is-open', function(e){
+    e.stopPropagation();
+  });
 
   function initUIForUser(user) {
   }

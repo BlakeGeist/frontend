@@ -19,6 +19,8 @@
   }
 
   function ready () {
+    var template = H.renderPartial('account-info', site.context.fireUser)
+    //$('main').prepend(template);
   }
 
 })(window, window.site, window.jQuery);
